@@ -178,23 +178,26 @@ st.markdown(f"""
         font-size: 0.95rem !important;
     }}
 
-    /* Gemini-Style Compact Place Card Thumbnails */
+    /* Subtle, Compact Contextual Visual Thumbnails (Text Stands Out) */
     .stChatMessage img {{
-        max-width: 150px !important;
-        max-height: 105px !important;
-        width: 150px !important;
-        height: 100px !important;
+        max-width: 140px !important;
+        max-height: 95px !important;
+        width: 140px !important;
+        height: 90px !important;
         object-fit: cover !important;
-        border-radius: 14px !important;
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
-        margin: 4px 8px 4px 0 !important;
+        border-radius: 12px !important;
+        border: 1px solid rgba(148, 163, 184, 0.25) !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+        margin: 2px 8px 2px 0 !important;
         display: inline-block !important;
+        vertical-align: middle !important;
         transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease !important;
     }}
 
     .stChatMessage img:hover {{
-        transform: scale(1.06) !important;
-        box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4) !important;
+        transform: scale(1.05) !important;
+        border-color: rgba(56, 189, 248, 0.6) !important;
+        box-shadow: 0 6px 18px rgba(56, 189, 248, 0.35) !important;
     }}
 
     /* Main Page Suggestion Cards Styling (ChatGPT/Gemini Style) */

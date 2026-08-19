@@ -125,46 +125,82 @@ class AvalahalliEngine:
     }
 
     LANDMARK_PHOTO_REGISTRY = {
+        'usa': [
+            ('Statue of Liberty & Manhattan', 'https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=350&q=80', '4.8', 'National Monument', 'Iconic neoclassical statue on Liberty Island overlooking New York Harbor.'),
+            ('Grand Canyon National Park', 'https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=350&q=80', '4.9', 'Natural World Wonder', 'Vast 277-mile canyon carved by Colorado River with layered red rock vistas.'),
+            ('Golden Gate Bridge', 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=350&q=80', '4.8', 'Suspension Bridge', 'Iconic international orange suspension bridge in San Francisco.')
+        ],
+        'united states': [
+            ('Statue of Liberty & Manhattan', 'https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=350&q=80', '4.8', 'National Monument', 'Iconic neoclassical statue on Liberty Island overlooking New York Harbor.'),
+            ('Grand Canyon National Park', 'https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=350&q=80', '4.9', 'Natural World Wonder', 'Vast 277-mile canyon carved by Colorado River with layered red rock vistas.'),
+            ('Golden Gate Bridge', 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=350&q=80', '4.8', 'Suspension Bridge', 'Iconic international orange suspension bridge in San Francisco.')
+        ],
+        'china': [
+            ('Great Wall of China (Mutianyu)', 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=350&q=80', '4.9', 'Ancient World Wonder', 'Historic stone defense wall spanning thousands of kilometers across mountain ridges.'),
+            ('Forbidden City & Palace Museum', 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=350&q=80', '4.8', 'Imperial Palace Complex', 'Centuries-old royal palace containing 980 surviving buildings in Beijing.'),
+            ('The Bund & Lujiazui Skyline', 'https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=350&q=80', '4.7', 'Futuristic Waterfront', 'Historic colonial architecture facing modern skyscrapers in Shanghai.')
+        ],
+        'uk': [
+            ('Big Ben & Parliament', 'https://images.unsplash.com/photo-1529655683826-aba9b3e77383?auto=format&fit=crop&w=350&q=80', '4.8', 'Historic Clock Tower', 'World-famous neo-Gothic clock tower and British Parliament.'),
+            ('Tower Bridge (London)', 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=350&q=80', '4.8', 'Iconic Victorian Bridge', 'Victorian suspension bridge with twin towers over River Thames.'),
+            ('Edinburgh Castle & Royal Mile', 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=350&q=80', '4.8', 'Historic Fortress', 'Historic fortress dominating the skyline of Edinburgh, Scotland.')
+        ],
+        'germany': [
+            ('Neuschwanstein Castle', 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=350&q=80', '4.9', 'Bavarian Fairy-Tale Castle', '19th-century historicist palace perched on a rugged hill above Hohenschwangau.'),
+            ('Brandenburg Gate (Berlin)', 'https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=350&q=80', '4.7', 'Neoclassical Monument', '18th-century monument symbolizing German unity and history.')
+        ],
+        'canada': [
+            ('Niagara Falls (Ontario)', 'https://images.unsplash.com/photo-1489447068241-b3490214e879?auto=format&fit=crop&w=350&q=80', '4.9', 'Glacial Waterfall', 'Massive cascading waterfalls spanning the Canada–United States border.'),
+            ('Banff National Park & Lake Louise', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=350&q=80', '4.9', 'Turquoise Glacial Lake', 'Pristine turquoise waters surrounded by towering Canadian Rocky Mountain peaks.')
+        ],
+        'brazil': [
+            ('Christ the Redeemer & Corcovado', 'https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f?auto=format&fit=crop&w=350&q=80', '4.9', 'Art Deco Wonder', 'Iconic 30-meter Art Deco statue of Jesus atop Mount Corcovado in Rio de Janeiro.'),
+            ('Copacabana & Sugarloaf Mountain', 'https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&w=350&q=80', '4.7', 'Coastal Panorama', 'Crescent beach and panoramic cable car rides over Guanabara Bay.')
+        ],
+        'mexico': [
+            ('Chichen Itza Mayan Pyramid', 'https://images.unsplash.com/photo-1518638150340-f706e86654de?auto=format&fit=crop&w=350&q=80', '4.9', 'Mesoamerican Archeological Wonder', 'Ancient Mayan step-pyramid temple of El Castillo in Yucatán.'),
+            ('Tulum Ruins & Caribbean Coast', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=350&q=80', '4.8', 'Cliffside Mayan Port', '13th-century walled Mayan ruins overlooking turquoise Caribbean waters.')
+        ],
+        'egypt': [
+            ('Great Pyramids of Giza & Sphinx', 'https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=350&q=80', '4.9', 'Ancient Wonder of the World', '4,500-year-old royal pyramid tombs and the monumental Great Sphinx.'),
+            ('Luxor Temple & Valley of the Kings', 'https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=350&q=80', '4.8', 'Ancient Thebes Sanctuary', 'Monumental sandstone pharaonic temples and hieroglyph-carved tombs.')
+        ],
+        'vietnam': [
+            ('Ha Long Bay', 'https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=350&q=80', '4.9', 'UNESCO Limestone Seascape', 'Thousands of towering limestone karst islands and emerald green waters.'),
+            ('Hoi An Ancient Lantern Town', 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=350&q=80', '4.8', 'Lantern-Lit Trading Port', 'Well-preserved 15th-century trading port with wooden merchant houses.')
+        ],
         'japan': [
             ('Sensō-ji Temple', 'https://images.unsplash.com/photo-1583084501230-e8418044333e?auto=format&fit=crop&w=350&q=80', '4.7', 'Ancient Buddhist Temple', 'Tokyo\'s oldest temple, Kaminarimon thunder gate & Nakamise-dori shopping street.'),
             ('Fushimi Inari-taisha', 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=350&q=80', '4.8', 'Shinto Shrine', '10,000+ vibrant orange torii gates ascending sacred Mount Inari with mountain paths.'),
             ('Mount Fuji & Lake Ashi', 'https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?auto=format&fit=crop&w=350&q=80', '4.9', 'Scenic Volcano & Lake', 'Scenic pirate boat cruise on Lake Ashi with Mount Fuji views and Hakone onsen.'),
-            ('Shibuya Sky & Crossing', 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=350&q=80', '4.6', 'Observation Deck', 'World\'s busiest pedestrian crosswalk and open-air 360° rooftop observatory.'),
-            ('Dotonbori Canal', 'https://images.unsplash.com/photo-1590559899731-a382839e5549?auto=format&fit=crop&w=350&q=80', '4.7', 'Street Food & Nightlife', 'Neon-lit canal district, iconic Glico running man sign, and fresh takoyaki.')
+            ('Shibuya Sky & Crossing', 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=350&q=80', '4.6', 'Observation Deck', 'World\'s busiest pedestrian crosswalk and open-air 360° rooftop observatory.')
         ],
         'tokyo': [
             ('Sensō-ji Temple', 'https://images.unsplash.com/photo-1583084501230-e8418044333e?auto=format&fit=crop&w=350&q=80', '4.7', 'Ancient Buddhist Temple', 'Historic temple in Asakusa with iconic giant lantern and market arcade.'),
-            ('Shibuya Crossing & Sky', 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=350&q=80', '4.6', 'City Landmark & Sky View', 'Futuristic skyline vistas, Hachiko monument, and energetic shopping streets.'),
-            ('Tokyo Tower & Cityscape', 'https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?auto=format&fit=crop&w=350&q=80', '4.5', 'Observation Tower', 'Communications and observation tower in the heart of Minato.')
+            ('Shibuya Crossing & Sky', 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=350&q=80', '4.6', 'City Landmark & Sky View', 'Futuristic skyline vistas, Hachiko monument, and energetic shopping streets.')
         ],
         'kyoto': [
             ('Fushimi Inari-taisha', 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=350&q=80', '4.8', 'Shinto Shrine', '10,000+ vermilion Torii gates winding up sacred Mount Inari.'),
-            ('Kinkaku-ji (Golden Pavilion)', 'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=350&q=80', '4.7', 'Zen Temple', 'Gold-leaf adorned Zen pavilion reflected in the mirror pond.'),
-            ('Arashiyama Bamboo Grove', 'https://images.unsplash.com/photo-1528164344705-475426879c0d?auto=format&fit=crop&w=350&q=80', '4.7', 'Scenic Nature', 'Soaring green bamboo grove paths leading to Tenryu-ji UNESCO temple.')
+            ('Kinkaku-ji (Golden Pavilion)', 'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=350&q=80', '4.7', 'Zen Temple', 'Gold-leaf adorned Zen pavilion reflected in the mirror pond.')
         ],
         'shanghai': [
             ('The Bund & Lujiazui', 'https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=350&q=80', '4.7', 'Waterfront Promenade', 'Neoclassical colonial heritage buildings facing futuristic Pudong skyscrapers.'),
-            ('Yu Garden (Yuyuan)', 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=350&q=80', '4.6', 'Classical Ming Garden', '16th-century rockeries, koi ponds, and traditional Chinese pavilions.'),
-            ('Zhujiajiao Water Town', 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=350&q=80', '4.6', 'Ancient Water Canals', 'Traditional wooden boat rides along 400-year-old stone bridges.')
+            ('Yu Garden (Yuyuan)', 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=350&q=80', '4.6', 'Classical Ming Garden', '16th-century rockeries, koi ponds, and traditional Chinese pavilions.')
         ],
         'paris': [
             ('Eiffel Tower', 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=350&q=80', '4.8', 'Iconic Landmark', 'Wrought-iron lattice tower with panoramic city views and Seine promenade.'),
-            ('Louvre Museum', 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=350&q=80', '4.7', 'Art Museum', 'World\'s largest museum featuring the Mona Lisa and glass pyramid entrance.'),
-            ('Sacré-Cœur & Montmartre', 'https://images.unsplash.com/photo-1522093007474-d86e9bf7ba6f?auto=format&fit=crop&w=350&q=80', '4.8', 'Historic Basilica', 'Hilltop Roman Catholic basilica overlooking the romantic streets of Montmartre.')
+            ('Louvre Museum', 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=350&q=80', '4.7', 'Art Museum', 'World\'s largest museum featuring the Mona Lisa and glass pyramid entrance.')
         ],
         'london': [
             ('Tower Bridge', 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=350&q=80', '4.8', 'Historic Bridge', 'Iconic Victorian suspension bridge spanning the River Thames.'),
-            ('London Eye', 'https://images.unsplash.com/photo-1526129318478-62ed807ebdf9?auto=format&fit=crop&w=350&q=80', '4.5', 'Observation Wheel', 'Cantilevered observation wheel with 360-degree views of Westminster.'),
             ('Big Ben & Parliament', 'https://images.unsplash.com/photo-1529655683826-aba9b3e77383?auto=format&fit=crop&w=350&q=80', '4.7', 'Clock Tower & Heritage', 'World-famous neo-Gothic clock tower and British Parliament.')
         ],
         'new york': [
             ('Central Park', 'https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=350&q=80', '4.8', 'Urban Nature Park', '843-acre green oasis featuring Bow Bridge, Bethesda Terrace, and lakes.'),
-            ('Times Square', 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=350&q=80', '4.6', 'Entertainment Hub', 'Dazzling digital billboards, Broadway theaters, and 24/7 energetic city life.'),
-            ('Brooklyn Bridge', 'https://images.unsplash.com/photo-1518391846015-55a9cc003b25?auto=format&fit=crop&w=350&q=80', '4.8', 'Historic Suspension Bridge', 'Scenic pedestrian promenade with Lower Manhattan skyline vistas.')
+            ('Times Square', 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=350&q=80', '4.6', 'Entertainment Hub', 'Dazzling digital billboards, Broadway theaters, and 24/7 energetic city life.')
         ],
         'singapore': [
             ('Gardens by the Bay', 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=350&q=80', '4.8', 'Futuristic Botanical Park', 'Towering Supertrees, Cloud Forest indoor waterfall, and Flower Dome.'),
-            ('Jewel Changi Rain Vortex', 'https://images.unsplash.com/photo-1565967511849-76a60a516170?auto=format&fit=crop&w=350&q=80', '4.8', 'Indoor Waterfall & Canopy', 'World\'s tallest 40m indoor waterfall surrounded by terraced forest.'),
             ('Marina Bay Sands SkyPark', 'https://images.unsplash.com/photo-1506351421178-63b52a2d2562?auto=format&fit=crop&w=350&q=80', '4.7', 'Observation Deck & Resort', '57th-floor panoramic observation deck and infinity pool.')
         ],
         'barcelona': [
@@ -181,16 +217,11 @@ class AvalahalliEngine:
         ],
         'italy': [
             ('The Colosseum (Rome)', 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=350&q=80', '4.8', 'Ancient Amphitheatre', 'Monumental 2,000-year-old Roman gladiatorial arena.'),
-            ('Venice Grand Canal', 'https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=350&q=80', '4.8', 'Historic Canals', 'Romantic gondola cruises past historic Venetian palazzos.'),
-            ('Florence Duomo Cathedral', 'https://images.unsplash.com/photo-1543429776-2782fc8e1acd?auto=format&fit=crop&w=350&q=80', '4.9', 'Renaissance Cathedral', 'Brunelleschi\'s terracotta-tiled dome and Giotto\'s Campanile.')
+            ('Venice Grand Canal', 'https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=350&q=80', '4.8', 'Historic Canals', 'Romantic gondola cruises past historic Venetian palazzos.')
         ],
         'switzerland': [
             ('Matterhorn Zermatt', 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=350&q=80', '4.9', 'Alpine Peak & Nature', 'Iconic pyramid mountain peak and premier alpine hiking/skiing.'),
             ('Lake Lucerne & Alps', 'https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=350&q=80', '4.8', 'Scenic Mountain Lake', 'Historic Chapel Bridge, steamboat cruises, and Mount Pilatus views.')
-        ],
-        'greece': [
-            ('Oia Sunset (Santorini)', 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=350&q=80', '4.9', 'Cycladic Village & Coast', 'Whitewashed cliffside houses and blue-domed churches over the Aegean Sea.'),
-            ('Acropolis & Parthenon (Athens)', 'https://images.unsplash.com/photo-1555993539-1732b0258235?auto=format&fit=crop&w=350&q=80', '4.8', 'Ancient Citadel', '5th-century BC monumental temple dedicated to goddess Athena.')
         ],
         'dubai': [
             ('Burj Khalifa', 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=350&q=80', '4.8', 'Skyscraper & Observatory', 'World\'s tallest building with observation decks over the Arabian Gulf.'),
@@ -200,9 +231,9 @@ class AvalahalliEngine:
             ('Uluwatu Cliff Temple', 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=350&q=80', '4.7', 'Cliffside Sea Temple', 'Dramatic 70m ocean cliff temple with traditional Kecak fire dance.'),
             ('Tegallalang Rice Terraces', 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=350&q=80', '4.6', 'Scenic Terraces in Ubud', 'Lush emerald green terraced valleys with traditional Subak irrigation.')
         ],
-        'bangkok': [
+        'thailand': [
             ('Grand Palace & Emerald Buddha', 'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=350&q=80', '4.7', 'Royal Temple Complex', 'Ornate gold-leaf architecture and Thailand\'s most sacred Emerald Buddha.'),
-            ('Wat Arun (Temple of Dawn)', 'https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=350&q=80', '4.8', 'Riverside Buddhist Temple', 'Porcelain-encrusted riverfront pagoda overlooking the Chao Phraya.')
+            ('Phi Phi Islands & Maya Bay', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=350&q=80', '4.8', 'Tropical Island Lagoons', 'Limestone cliffs encircling crystal-clear turquoise waters.')
         ],
         'india': [
             ('Taj Mahal (Agra)', 'https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=350&q=80', '4.9', 'UNESCO World Wonder', 'Iconic ivory-white marble mausoleum on the south bank of the Yamuna River.'),
@@ -241,24 +272,33 @@ class AvalahalliEngine:
     def _get_landmark_photos_markdown(self, dest: str) -> str:
         d = dest.lower()
         items = []
-        COUNTRY_KEYS = {'india', 'italy', 'japan', 'france', 'uk', 'usa', 'china', 'spain'}
-        # 1. Check specific cities/regions first (e.g. 'goa', 'manali', 'tokyo', 'kyoto', 'kerala')
-        for key, p_list in self.LANDMARK_PHOTO_REGISTRY.items():
+        COUNTRY_KEYS = {'india', 'italy', 'japan', 'france', 'uk', 'usa', 'united states', 'china', 'spain', 'germany', 'canada', 'brazil', 'mexico', 'egypt', 'vietnam'}
+        # 1. Check specific cities/regions first (e.g. 'goa', 'manali', 'tokyo', 'kyoto', 'kerala', 'paris', 'london', 'shanghai')
+        for key in sorted(self.LANDMARK_PHOTO_REGISTRY.keys(), key=len, reverse=True):
             if key not in COUNTRY_KEYS and key in d:
-                items = p_list
+                items = self.LANDMARK_PHOTO_REGISTRY[key]
                 break
         # 2. Check country keys fallback
         if not items:
-            for key, p_list in self.LANDMARK_PHOTO_REGISTRY.items():
+            for key in sorted(self.LANDMARK_PHOTO_REGISTRY.keys(), key=len, reverse=True):
                 if key in d:
-                    items = p_list
+                    items = self.LANDMARK_PHOTO_REGISTRY[key]
                     break
-        # 3. Dynamic Fallback
+        # 3. Dynamic Unique Web Discovery for any unlisted destination
         if not items:
-            items = [
-                (f"{dest.title()} Historic Quarter & Promenade", "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=350&q=80", "4.8", "Historic Landmark", f"Premier heritage architecture and vibrant cultural streets of {dest.title()}."),
-                (f"{dest.title()} Scenic Viewpoint & Natural Panorama", "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=350&q=80", "4.7", "Scenic Viewpoint", f"Scenic landscape vistas, photography hotspots, and top attractions in {dest.title()}.")
-            ]
+            clean_dest = dest.split(',')[0].strip()
+            dynamic_thumb = self._fetch_web_visual_thumbnail(clean_dest)
+            if dynamic_thumb:
+                t_name, t_url, t_desc = dynamic_thumb
+                items = [
+                    (f"{clean_dest.title()} Premier Landmark", t_url, "4.8", "Iconic Landmark", f"Top-rated architectural and cultural landmark in {clean_dest.title()}."),
+                    (f"{clean_dest.title()} Scenic Panorama", "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=350&q=80", "4.7", "Scenic Destination", f"Scenic landscape vistas and natural highlights of {clean_dest.title()}.")
+                ]
+            else:
+                items = [
+                    (f"{clean_dest.title()} Historic Quarter", "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=350&q=80", "4.8", "Heritage Landmark", f"Historic quarter and cultural streets of {clean_dest.title()}."),
+                    (f"{clean_dest.title()} Scenic Viewpoint", "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=350&q=80", "4.7", "Scenic Panorama", f"Scenic viewpoints and attractions in {clean_dest.title()}.")
+                ]
         
         md = "### 📸 Recommended Places & Landmark Highlights\n\n"
         md += "| Place Photo | Landmark & Category | Overview & Highlights |\n"
@@ -266,6 +306,69 @@ class AvalahalliEngine:
         for name, url, rating, cat, highlight in items:
             md += f"| ![{name}]({url}) | **{name}**<br>⭐ **{rating}** · *{cat}* | {highlight} |\n"
         return md.strip()
+
+    def _fetch_web_visual_thumbnail(self, query: str):
+        """
+        Dynamically fetches a clean, helpful web visual thumbnail for entities, science topics, gadgets, landmarks, or food.
+        Uses in-memory caching and rapid Wikipedia PageImages API with curated fallback.
+        """
+        if not hasattr(self, '_img_cache'):
+            self._img_cache = {}
+            
+        clean_q = re.sub(r'^(what is|what was|what are|who is|who was|who were|explain|tell me about|how does|how do|how is|history of|overview of|define|is|are)\s+', '', query, flags=re.I).strip()
+        clean_q = re.sub(r'^(a|an|the)\s+', '', clean_q, flags=re.I).strip()
+        clean_q = re.sub(r'\s+(work|works|work\?|mean|mean\?|\?)$', '', clean_q, flags=re.I).strip()
+        if not clean_q or len(clean_q) < 3:
+            return None
+            
+        cache_key = clean_q.lower()
+        if cache_key in self._img_cache:
+            return self._img_cache[cache_key]
+            
+        # 1. Curated High-Definition Encyclopedia Mapping
+        CURATED_ENTITIES = {
+            'crispr': ('CRISPR-Cas9 Molecular Complex', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/4QYZ.png/500px-4QYZ.png', 'Cas9 endonuclease with guide RNA targeting DNA'),
+            'cas9': ('CRISPR-Cas9 System', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/4QYZ.png/500px-4QYZ.png', 'Molecular gene-editing scissors'),
+            'photosynthesis': ('Photosynthesis Process Diagram', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Photosynthesis_en.svg/500px-Photosynthesis_en.svg.png', 'Light reactions and Calvin cycle overview'),
+            'james webb': ('James Webb Space Telescope (JWST)', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/JWST_spacecraft_model_3.png/500px-JWST_spacecraft_model_3.png', 'Infrared space observatory with primary mirror array'),
+            'jwst': ('James Webb Space Telescope', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/JWST_spacecraft_model_3.png/500px-JWST_spacecraft_model_3.png', 'NASA/ESA flagship infrared space observatory'),
+            'dna': ('DNA Double Helix', 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/DNA_orbit_animated.gif/500px-DNA_orbit_animated.gif', 'Structure of the double-stranded DNA helix'),
+            'quantum computer': ('Superconducting Quantum Computer', 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/IBM_Q_System_One.jpg/500px-IBM_Q_System_One.jpg', 'Cryogenic dilution refrigerator and qubit processor'),
+            'quantum computing': ('Superconducting Quantum Computer', 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/IBM_Q_System_One.jpg/500px-IBM_Q_System_One.jpg', 'Cryogenic quantum processor architecture'),
+            'taj mahal': ('Taj Mahal, Agra', 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Taj_Mahal_%28Edited%29.jpeg/500px-Taj_Mahal_%28Edited%29.jpeg', '17th-century white marble mausoleum landmark'),
+            'biryani': ('Hyderabadi Dum Biryani', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/%22Hyderabadi_Dum_Biryani%22.jpg/500px-%22Hyderabadi_Dum_Biryani%22.jpg', 'Fragrant basmati rice cooked with marinated meat and spices'),
+            'shalimar mutton': ('Shalimar Mutton Stall', 'https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=350&q=80', 'Fresh cuts and regional mutton specialties in Avalahalli'),
+            'star mutton': ('Star Mutton Stall', 'https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=350&q=80', 'Mr. G Srinivasalu\'s top recommendation in Avalahalli'),
+            'cit bangalore': ('Cambridge Institute of Technology (CIT)', 'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=350&q=80', 'Campus overview and academic block'),
+            'breaking bad': ('Breaking Bad', 'https://upload.wikimedia.org/wikipedia/en/6/61/Breaking_Bad_title_card.png', 'Critically acclaimed AMC crime drama series'),
+            'the wire': ('The Wire', 'https://upload.wikimedia.org/wikipedia/en/5/54/The_Wire_-_Series_title.jpg', 'HBO urban crime drama series set in Baltimore')
+        }
+        for k, v in CURATED_ENTITIES.items():
+            if k in cache_key:
+                self._img_cache[cache_key] = v
+                return v
+                
+        # 2. Dynamic Wikipedia PageImages lookup (fast 1.2s timeout)
+        try:
+            import urllib.request, urllib.parse, json
+            for query_variant in [clean_q, clean_q.title()]:
+                encoded_term = urllib.parse.quote(query_variant)
+                api_url = f"https://en.wikipedia.org/w/api.php?action=query&titles={encoded_term}&prop=pageimages&format=json&pithumbsize=350"
+                req = urllib.request.Request(api_url, headers={'User-Agent': 'AvalahalliAI-Bot/2.0'})
+                with urllib.request.urlopen(req, timeout=1.2) as response:
+                    data = json.loads(response.read().decode('utf-8'))
+                    pages = data.get('query', {}).get('pages', {})
+                    for page_id, page_data in pages.items():
+                        if page_id != "-1" and 'thumbnail' in page_data:
+                            src = page_data['thumbnail']['source']
+                            title = page_data.get('title', clean_q.title())
+                            val = (title, src, f"Visual reference for {title}")
+                            self._img_cache[cache_key] = val
+                            return val
+        except Exception:
+            pass
+            
+        return None
 
     def _normalize_query_and_correct_typos(self, text: str) -> str:
         if not text: return ""
@@ -336,6 +439,9 @@ class AvalahalliEngine:
             r'\bvu\b': 'vue',
             r'\blsm\s*tre\b': 'lsm tree',
             r'\bbtree\b': 'b-tree',
+            r'\btommorow\b': 'tomorrow',
+            r'\btmrw\b': 'tomorrow',
+            r'\btmr\b': 'tomorrow',
         }
         for pat, repl in TYPO_MAP.items():
             q = re.sub(pat, repl, q, flags=re.I)
@@ -419,12 +525,12 @@ class AvalahalliEngine:
         if is_code_generation and not is_comparison:
             return {'response': self._question_handler(query, language, intent, topic, doc_content)}
 
-        # If query is travel/itinerary/pricing/places/recommendations/comparisons/education/reviews/local food, route to search summarizer
+        # If query is travel/itinerary/pricing/places/recommendations/comparisons/education/reviews/local food/science/general questions, route to search summarizer
         is_rec_or_comp_or_info = any(w in query.lower() for w in [
             "top 10", "top 5", "top 3", "best ", "recommend", "suggest", "movies", "movie", "tv show", "tv shows", 
             "series", "shows", "anime", "books", "book", "games", "game", "podcast", "versus", " vs ", " vs. ", 
             "difference between", "compare", "breakthrough", "latest news", "quantum computing", "history of", 
-            "who is", "what is", "biography", "trip", "travel", "vacation", "itinerary", "places to visit", 
+            "who is", "who was", "who were", "what is", "what was", "what are", "how does", "how do", "how is", "explain ", "tell me about", "overview of", "biography", "trip", "travel", "vacation", "itinerary", "places to visit", 
             "best places", "pricing", "rupee", "rupees", "inr", "hotel", "flight", "shanghai", "japan", "paris", "london", "tokyo", "kyoto", "rome", "barcelona",
             "college", "colleges", "cllge", "cllges", "university", "universities", "campus", "engineering", "medical", "iisc", "rvce", "bmsce", "msrit", "review", "good college", "good university", "placement", "ranking",
             "mutton", "meat shop", "meat stall", "mutton shop", "mutton stall", "fresh meat", "chicken and mutton", "mutton in"
@@ -909,12 +1015,99 @@ I am built to provide fast, high-quality, and friendly assistance across:
 
 **Mr. G Srinivasalu** is a respected local resident and connoisseur in Avalahalli, known for his trusted recommendations — including his top pick for authentic, fresh country mutton at **Star Mutton Stall** (Avalahalli Main Road)!"""
 
+        # 7. Affirmations & Follow-up Continuations ("yes", "yeah", "sure", "ok", "yes please", "tell me more", "continue", "go deeper")
+        if re.search(r'^(yes|yeah|yep|yup|sure|ok|okay|yes please|please|tell me more|continue|go deeper|go ahead|definitely|absolutely|more details|more info|dive deeper|proceed|why not)\b', q) and len(q.split()) <= 4:
+            return """### 🚀 Absolutely! Here is the Deeper Breakdown & Next Steps
+
+I'm ready to dive deeper into the details! Here are the key areas we can explore next:
+
+1. 🗺️ **Detailed Timing & Hour-by-Hour Schedule**: Morning, afternoon, and evening breakdown with transit logistics.
+2. 💡 **Local Insider Secrets & Best Eateries**: Authentic restaurants, street food spots, and hidden viewpoints.
+3. 💰 **Granular Expense Estimates & Currency Conversion**: Specific hotel tiers, entrance tickets, and transport passes.
+4. 📋 **Preparation Checklist**: Visa requirements, local transit cards, weather gear, and packing advice.
+
+---
+**Which specific destination, day, or topic would you like me to expand on next?**"""
+
+        # 8. Content Safety & Respectful Dialogue
+        if re.search(r'\b(nigger|nigga|negga|faggot|bitch|cunt|asshole|bastard|dickhead|motherfucker)\b', q):
+            return """### 😊 Let's keep things respectful and productive!
+
+I am **Avalahalli AI**, here to assist you with high-speed intelligence across programming, research, travel, colleges, and everyday questions.
+
+How can I help you today? 🚀"""
+
+        # 9. Explicit Help Requests ("help", "help me", "bro help", "brody help me please", "can you help", "i need help")
+        if re.search(r'\b(help\s+me|help\s+please|help\s+pls|brody\s+help|bro\s+help|can\s+you\s+help|need\s+(?:some\s+)?help|assist\s+me|help\s+out|help!)\b', q) or q in ['help', 'help me', 'help please', 'pls help', 'plz help']:
+            return """### 🤝 I've got your back! How can I help you?
+
+Tell me what you're working on or what you'd like to explore:
+- 💻 **Software Engineering & Code**: Debugging, algorithms, API design, or performance optimization.
+- ✈️ **Travel Planning**: Personalized itineraries, landmark photo galleries, and budget breakdowns.
+- 🎓 **Colleges & Universities**: Placement stats, cutoffs, autonomous campus reviews, and rankings.
+- 🍖 **Local Bangalore Spots**: Top food recommendations, mutton stalls, and dining guides.
+- 🔬 **Science & Deep Research**: In-depth explanations with real-world context and diagrams.
+
+---
+**What's on your mind? Just tell me what you need and we'll get it done! 🚀**"""
+
+        # 10. Farewells & Goodbyes ("bye", "goodbye", "see you", "see ya", "cya", "gn", "goodnight", "good night", "take care")
+        if re.search(r'^(bye|goodbye|good\s*bye|see\s+ya|see\s+you|cya|gn|goodnight|good\s*night|catch\s+you\s+later|talk\s+soon|have\s+a\s+good\s+day|take\s+care)\b', q) and len(q.split()) <= 4:
+            return """### 👋 Goodbye! Have a wonderful time!
+
+It was a pleasure helping you! Whenever you want to plan another trip, explore colleges, check local recommendations, or solve coding problems, I'll be right here.
+
+Take care and see you soon! 🚀"""
+
+        # 11. Deferrals / Tomorrow / Later ("tomorrow", "tommorow", "tmrw", "tmr", "later", "talk later", "after some time", "next time")
+        if re.search(r'^(tomorrow|tommorow|tmrw|tmr|later|talk\s+later|after\s+some\s+time|next\s+time|catch\s+you\s+tomorrow|see\s+you\s+tomorrow|lets\s+do\s+it\s+tomorrow|let\'s\s+do\s+it\s+tomorrow)\b', q) and len(q.split()) <= 5:
+            return """### 🌅 Sounds great! We'll catch up tomorrow!
+
+Have a fantastic and relaxing rest of your day/evening! Whenever you're ready to pick things back up, I'll be right here with all the details ready.
+
+Have a great night and talk tomorrow! ✨"""
+
+        # 12. Negations & "No" / "No thanks" / "That's all" ("no", "nope", "nah", "no thanks", "nothing else", "thats all", "im good")
+        if re.search(r'^(no|nope|nah|no\s+thanks|no\s+thank\s+you|nothing|nothing\s+else|that\'s\s+all|thats\s+all|im\s+good|i\'m\s+good|all\s+good|no\s+more|none)\b', q) and len(q.split()) <= 4:
+            return """### 👍 Got it! No problem at all.
+
+Whenever you have any more questions, need new recommendations, travel guides, or technical solutions, just send a message.
+
+Have an awesome day ahead! 🚀"""
+
+        # 13. Casual Vernacular Greetings ("what's good", "whats good", "waddup", "what up", "say less", "gotchu", "yo bro")
+        if re.search(r'^(what\'s\s+good|whats\s+good|waddup|what\s+up|say\s+less|i\s+got\s+you|gotchu|yo\s+bro|wassup)\b', q) and len(q.split()) <= 4:
+            return """### 👊 Say less, I gotchu! What's good with you?
+
+Whatchu need a hand with today? Let's get it:
+- 💻 **Code & Debugging**: Fixin' bugs, clean logic, and fast scripts.
+- ✈️ **Travel Plans**: Spot-on itineraries, hotels, and top attractions.
+- 🎓 **Campus & Colleges**: Placement stats, cutoffs, and real reviews.
+- 🍖 **Local Food & Spots**: Best food joints and hidden gems.
+
+---
+**Whatchu tryin' to work on? Just let me know! 🚀**"""
+
+        # 14. Slang & Expressions ("dayum", "dayum boi", "damn", "wow", "cool", "nice", "bruh", "dude", "awesome", "lol")
+        if re.search(r'^(dayum|dayum boi|damn|damn boi|wow|cool|nice|awesome|great|super|fire|lit|bruh|dude|bro|omg|lol|lmao|haha|nice one)\b', q) and len(q.split()) <= 4:
+            return """### 😄 Appreciate the energy! 🔥
+
+I'm **Avalahalli AI**, always here with high-speed intelligence and clean answers!
+
+What shall we explore or chat about next? 🚀
+- ✈️ **Plan another customized trip or vacation**
+- 🍖 **Top local spots & mutton recommendations**
+- 💻 **Code synthesis, algorithms & debugging**
+- 🎓 **College reviews, placements & campus rankings**"""
+
         return None
 
     def _scientific_crispr_explainer(self):
         return """## 🔬 How CRISPR-Cas9 Gene Editing Works — Comprehensive Scientific Breakdown
 
-**CRISPR-Cas9** (*Clustered Regularly Interspaced Short Palindromic Repeats and CRISPR-associated protein 9*) is a revolutionary molecular technology that functions as programmable biological scissors to make precise, targeted modifications to an organism's DNA.
+| 📸 Visual Reference | 🧬 Molecular Architecture Overview |
+| :---: | :--- |
+| ![CRISPR-Cas9 Complex](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/4QYZ.png/500px-4QYZ.png) | **CRISPR-Cas9** (*Clustered Regularly Interspaced Short Palindromic Repeats and CRISPR-associated protein 9*) is a revolutionary molecular technology functioning as programmable biological scissors to make precise, targeted modifications to an organism's DNA. |
 
 ---
 
@@ -1044,23 +1237,178 @@ if __name__ == '__main__':
 *Click **"Run in Canvas"** to execute and test live in the execution sandbox!*
 """
 
+    def _handle_conversational_followup_and_info(self, query: str, lang: str = 'python') -> str:
+        q = query.lower().strip()
+
+        # 1. Food & Dining follow-ups
+        if any(w in q for w in ['food', 'eat', 'dining', 'restaurant', 'restaurants', 'cuisine', 'dishes', 'vegetarian', 'vegan', 'halal', 'mutton', 'breakfast', 'lunch', 'dinner']):
+            return f"""### 🍜 Local Dining, Food Specialties & Culinary Recommendations
+
+Here is a curated guide to dining, local delicacies, and food recommendations based on your question:
+
+#### 🍱 Must-Try Regional Specialties
+- **Signature Traditional Dishes**: Iconic local dishes prepared using fresh, seasonal regional ingredients.
+- **Street Food & Night Markets**: Bustling food stalls, skewers, noodle bars, and fresh market bites.
+- **Vegetarian & Dietary Options**: Clear dining options with plant-based, eggless, or vegan adaptations readily available.
+
+#### 💡 Essential Dining Tips
+1. **Meal Timings**: Peak lunch hours are 12:30–14:00; dinner is typically enjoyed from 19:00–21:30.
+2. **Reservations**: High-demand specialty eateries and fine-dining spots recommend booking 1–2 days in advance.
+3. **Payment**: Most established dining spots accept card/digital payments; keep modest cash for street food vendors.
+
+---
+**Would you like specific restaurant recommendations, dietary guides, or estimated dining budgets?**"""
+
+        # 2. Hotels & Accommodation follow-ups
+        if any(w in q for w in ['hotel', 'hotels', 'stay', 'where to stay', 'accommodation', 'hostel', 'resort', 'airbnb', 'neighborhood']):
+            return f"""### 🏨 Accommodation & Neighborhood Guide
+
+Here is a strategic breakdown of where to stay, top neighborhoods, and accommodation tiers:
+
+#### 🗺️ Strategic Neighborhood Options
+- **Central / Historic District**: Walking distance to premier landmarks, public squares, and top sights (Best for first-timers).
+- **Transit-Connected Modern District**: Direct subway/rail connections, shopping malls, and vibrant nightlife.
+- **Quiet / Residential Quarter**: Tree-lined streets, local cafes, and peaceful boutique stays (Best for families & relaxed pace).
+
+#### 📊 Tiered Options & Pricing
+| Accommodation Tier | Typical Price Range | Amenities & Features |
+| :--- | :--- | :--- |
+| **Budget (Hostel / Guesthouse)** | ₹1,500 – ₹3,500 / night | Shared or private room, free Wi-Fi, central location |
+| **Mid-Range (3-4 Star Hotel)** | ₹4,500 – ₹10,000 / night | En-suite bathroom, breakfast buffet, 24/7 front desk |
+| **Luxury (5-Star / Boutique Resort)** | ₹15,000 – ₹35,000+ / night | Spa, infinity pool, fine-dining restaurants, concierge |
+
+---
+**Would you like specific hotel picks or location recommendations for a particular budget?**"""
+
+        # 3. Transport & Getting Around follow-ups
+        if any(w in q for w in ['transport', 'transit', 'how to get around', 'metro', 'train', 'subway', 'taxi', 'cab', 'bus', 'flight', 'pass', 'passes', 'ticket']):
+            return f"""### 🚇 Public Transportation & Transit Guide
+
+Here is a practical transit breakdown to help you navigate efficiently:
+
+#### 🚆 Primary Transit Modes
+1. **Metro & Subway**: The fastest and most cost-effective way to travel between key attractions during peak hours.
+2. **Regional & Express Trains**: Direct intercity links with comfortable reserved seating.
+3. **Taxis & Ride-Hailing**: Convenient for late-night transit or when traveling with heavy luggage.
+
+#### 💡 Transit Pro-Tips
+- **Tourist Day Passes**: Unlimited 24-hour / 72-hour transit passes usually pay for themselves within 3–4 rides.
+- **Tap-and-Go IC Cards**: Digital or physical smart cards allow seamless contactless entry at all turnstiles.
+- **Airport Transfers**: Dedicated express trains or airport express buses offer the most reliable transit times.
+
+---
+**Would you like details on specific transit passes, schedules, or airport transfer routes?**"""
+
+        # 4. Best Season & Weather follow-ups
+        if any(w in q for w in ['best time', 'when to visit', 'weather', 'season', 'climate', 'temperature', 'rain', 'winter', 'summer', 'spring', 'autumn', 'fall', 'months']):
+            return f"""### 🌤️ Best Time to Visit & Seasonal Weather Guide
+
+Here is the seasonal breakdown to help you choose the ideal travel window:
+
+#### 📅 Seasonal Overview
+- 🌸 **Spring (Peak Season)**: Pleasant, crisp temperatures and blooming landscapes (Ideal for outdoor sightseeing).
+- ☀️ **Summer**: Warm and lively with festive night markets and cultural events (Great for beach and mountain retreats).
+- 🍁 **Autumn (High Season)**: Clear skies, moderate climate, and vibrant seasonal foliage (Optimal for photography & walking tours).
+- ❄️ **Winter (Shoulder Season)**: Fewer crowds, festive illuminations, and lower hotel rates (Ideal for budget travelers).
+
+#### 🧳 What to Pack
+- Comfortable walking shoes (10,000–15,000 steps/day recommended).
+- Layered clothing and a light waterproof jacket.
+- Universal travel adapter and power bank.
+
+---
+**Would you like monthly temperature averages or seasonal packing advice?**"""
+
+        # 5. Cost & Budget follow-ups
+        if any(w in q for w in ['cost', 'how much', 'budget', 'price', 'pricing', 'expensive', 'cheap', 'forex', 'currency', 'cash', 'money']):
+            return f"""### 💰 Comprehensive Expense & Budget Breakdown
+
+Here is an estimated expenditure summary across standard travel tiers:
+
+#### 📊 Daily Budget Estimates (Per Person)
+- **Budget Backpacker**: ₹2,500 – ₹5,000 ($30 – $60) / day (Hostels, public transit, street food).
+- **Mid-Range Explorer**: ₹7,000 – ₹15,000 ($85 – $180) / day (3-star hotels, sit-down dining, guided sights).
+- **Luxury Experience**: ₹20,000 – ₹50,000+ ($250 – $600+) / day (5-star stays, private transit, fine dining).
+
+#### 💳 Smart Currency Tips
+1. **Zero-Forex Cards**: Use credit/debit cards with 0% foreign transaction markup for optimal exchange rates.
+2. **Emergency Cash**: Maintain modest local cash for small artisan markets and public transit tickets.
+
+---
+**Would you like me to calculate a complete estimated budget for your specific trip duration?**"""
+
+        # 6. Safety follow-ups
+        if any(w in q for w in ['safe', 'safety', 'solo', 'crime', 'emergency', 'police', 'hospital']):
+            return f"""### 🛡️ Safety & Travel Security Overview
+
+Here are key safety considerations and practical precautions:
+
+- **Overall Safety Level**: Highly rated for international and domestic travelers, including solo and family trips.
+- **Common Sense Measures**: Keep valuables secure in crowded transit hubs and store digital copies of your passport/visa.
+- **Emergency Numbers**: Local emergency services are prompt and multilingual assistance is available in major hubs.
+- **Travel Insurance**: Always carry comprehensive travel health insurance covering trip disruptions and medical care.
+
+---
+**Would you like emergency contact numbers or local etiquette tips?**"""
+
+        # 7. General follow-up / Explanation expansion
+        return f"""### 📌 Key Insights & Comprehensive Overview
+
+Here is a structured, in-depth breakdown addressing **{query.title()}**:
+
+#### 🔍 Core Details & Analysis
+- **Primary Highlights**: Key operational mechanisms, verified facts, and strategic considerations.
+- **Practical Application**: Real-world context, industry standards, and best practices.
+- **Actionable Steps**: Recommended approach for planning, evaluation, and execution.
+
+---
+**Would you like me to dive deeper into any specific section or provide further comparisons?**"""
+
     def _contextual(self, query, lang, intent):
-        q=query.lower()
+        q = query.lower().strip()
         if re.search(r'\b(hello|hi|hey|good morning|greetings)\b', q) and len(q.split()) <= 4:
             return "### \U0001f44b Hello!\n\nI'm Avalahalli AI. I can help with:\n- \U0001f41b **Debugging** \u2014 paste buggy code\n- \u26a1 **Optimization** \u2014 make code shorter/faster\n- \U0001f4d6 **Explanation** \u2014 understand any code\n- \U0001f4bb **Generation** \u2014 write solutions for any problem\n\nWhat would you like help with?"
         if re.search(r'\b(thank|thanks|thank you)\b', q):
             return "### \U0001f60a You're welcome!\n\nFeel free to ask more programming questions anytime."
         if re.search(r'\b(summarize|summary|tldr)\b', q) and len(q.split()) <= 4:
             return "### \U0001f4cb Summary\n\nPlease provide the text, code, or document you'd like summarized."
-        concepts={'recursion':'A function calling itself to solve smaller subproblems. Needs a **base case** and a **recursive case**.','dynamic programming':'Solving complex problems by breaking into overlapping subproblems and caching results.','object oriented':'Code organized into **classes** and **objects**. Pillars: Encapsulation, Inheritance, Polymorphism, Abstraction.','pointer':'A variable storing a **memory address**. `&` gets address, `*` dereferences.','big o':'Notation for algorithm efficiency. Common: $O(1)$, $O(\\log n)$, $O(n)$, $O(n \\log n)$, $O(n^2)$.','linked list':'Linear structure where nodes contain data and a pointer to next node. $O(1)$ insert at head.','stack':'**LIFO** structure. `push()` adds, `pop()` removes from top.','queue':'**FIFO** structure. `enqueue()` adds to rear, `dequeue()` removes from front.','tree':'Hierarchical structure with root and children. Binary tree: max 2 children per node.','graph':'Vertices connected by edges. Can be directed/undirected, weighted/unweighted.','sorting':'Arranging elements in order. Best general: $O(n \\log n)$ (merge/quick sort).','hash':'Maps keys to values via hash function. $O(1)$ average lookup.','regex':'Patterns for text matching. `.` any char, `*` 0+, `+` 1+, `\\d` digit.','api':'Rules for software communication. REST uses HTTP methods for CRUD.'}
-        for c,exp in concepts.items():
+        
+        concepts = {
+            'recursion': 'A function calling itself to solve smaller subproblems. Needs a **base case** and a **recursive case**.',
+            'dynamic programming': 'Solving complex problems by breaking into overlapping subproblems and caching results.',
+            'object oriented': 'Code organized into **classes** and **objects**. Pillars: Encapsulation, Inheritance, Polymorphism, Abstraction.',
+            'pointer': 'A variable storing a **memory address**. `&` gets address, `*` dereferences.',
+            'big o': 'Notation for algorithm efficiency. Common: $O(1)$, $O(\\log n)$, $O(n)$, $O(n \\log n)$, $O(n^2)$.',
+            'linked list': 'Linear structure where nodes contain data and a pointer to next node. $O(1)$ insert at head.',
+            'stack': '**LIFO** structure. `push()` adds, `pop()` removes from top.',
+            'queue': '**FIFO** structure. `enqueue()` adds to rear, `dequeue()` removes from front.',
+            'tree': 'Hierarchical structure with root and children. Binary tree: max 2 children per node.',
+            'graph': 'Vertices connected by edges. Can be directed/undirected, weighted/unweighted.',
+            'sorting': 'Arranging elements in order. Best general: $O(n \\log n)$ (merge/quick sort).',
+            'hash': 'Maps keys to values via hash function. $O(1)$ average lookup.',
+            'regex': 'Patterns for text matching. `.` any char, `*` 0+, `+` 1+, `\\d` digit.',
+            'api': 'Rules for software communication. REST uses HTTP methods for CRUD.'
+        }
+        for c, exp in concepts.items():
             if re.search(r'\b' + re.escape(c) + r'\b', q) and not any(k in q for k in ['vs', 'versus', 'compare', 'performance', 'difference']):
                 return f"### \U0001f4d6 {c.title()}\n\n{exp}"
-        subj=re.sub(r'\b(write|create|build|implement|make|code|program|please|for|in|python|using|with|can you|could you|how to|i want|i need|a|an|the|me)\b','',q,flags=re.I)
-        subj=' '.join(subj.split()).strip()
-        if subj and len(subj)>2:
-            fn=re.sub(r'[^a-z0-9]+','_',subj.lower()).strip('_') or 'solve'
-            if lang in ('c','cpp'):
+
+        # Strict guard: Only generate code if explicit programming indicators are present
+        is_explicit_code = any(w in q for w in [
+            'code', 'function', 'class', 'def ', 'algorithm', 'script', 'program', 'implement',
+            'python', 'javascript', 'typescript', 'java', 'c++', 'sql', 'rust', 'golang',
+            'binary search', 'recursion', 'sorting', 'tree', 'graph', 'linked list', 'stack', 'queue',
+            'dynamic programming', 'two sum', 'lru', 'debounce', 'throttle', 'promise', 'syntax', 'bug', 'error'
+        ])
+        
+        if not is_explicit_code:
+            return self._handle_conversational_followup_and_info(query, lang)
+
+        subj = re.sub(r'\b(write|create|build|implement|make|code|program|please|for|in|python|using|with|can you|could you|how to|i want|i need|a|an|the|me)\b', '', q, flags=re.I)
+        subj = ' '.join(subj.split()).strip()
+        if subj and len(subj) > 2:
+            fn = re.sub(r'[^a-z0-9]+', '_', subj.lower()).strip('_') or 'solve'
+            if lang in ('c', 'cpp'):
                 return f"""### 🧠 Algorithmic Strategy & Problem Analysis: {subj.title()}
 
 - **Objective**: Implement a modular, robust C/C++ solution for `{subj}`.
@@ -4243,9 +4591,16 @@ int main() {
                 for item in unique_sentences[3:5]:
                     summary += f"- {item}\n"
                     
-        else: # General/News/Technology
-            summary += f"### 📌 Overview & Core Information\n"
-            summary += f"{unique_sentences[0] if unique_sentences else 'Here is the most relevant synthesis based on latest available data.'} {cite_str}\n\n"
+        else: # General/News/Technology/Science/Entities
+            visual_thumb = self._fetch_web_visual_thumbnail(query)
+            summary += f"### 📌 Overview & Core Information\n\n"
+            if visual_thumb:
+                v_title, v_url, v_cap = visual_thumb
+                summary += f"| 📸 Visual Reference | 🔍 Key Overview & Summary |\n"
+                summary += f"| :---: | :--- |\n"
+                summary += f"| ![{v_title}]({v_url}) | **{v_title}**<br>{unique_sentences[0] if unique_sentences else v_cap} {cite_str} |\n\n"
+            else:
+                summary += f"{unique_sentences[0] if unique_sentences else 'Here is the most relevant synthesis based on latest available data.'} {cite_str}\n\n"
             if len(unique_sentences) > 1:
                 summary += f"### 🔬 Key Insights & Highlights\n"
                 for item in unique_sentences[1:5]:
