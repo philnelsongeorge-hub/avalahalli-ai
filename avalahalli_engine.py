@@ -126,115 +126,145 @@ class AvalahalliEngine:
 
     LANDMARK_PHOTO_REGISTRY = {
         'japan': [
-            ('Fushimi Inari-taisha Shrine Torii Gates, Kyoto', 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=80'),
-            ('Mount Fuji & Chureito Pagoda in Spring', 'https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?auto=format&fit=crop&w=1200&q=80'),
-            ('Shibuya Crossing & Illuminated Tokyo Skyline', 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=80'),
-            ('Dotonbori Neon Street and Canal, Osaka', 'https://images.unsplash.com/photo-1590559899731-a382839e5549?auto=format&fit=crop&w=1200&q=80'),
+            ('Sensō-ji Temple', 'https://images.unsplash.com/photo-1583084501230-e8418044333e?auto=format&fit=crop&w=350&q=80', '4.7', 'Ancient Buddhist Temple', 'Tokyo\'s oldest temple, Kaminarimon thunder gate & Nakamise-dori shopping street.'),
+            ('Fushimi Inari-taisha', 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=350&q=80', '4.8', 'Shinto Shrine', '10,000+ vibrant orange torii gates ascending sacred Mount Inari with mountain paths.'),
+            ('Mount Fuji & Lake Ashi', 'https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?auto=format&fit=crop&w=350&q=80', '4.9', 'Scenic Volcano & Lake', 'Scenic pirate boat cruise on Lake Ashi with Mount Fuji views and Hakone onsen.'),
+            ('Shibuya Sky & Crossing', 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=350&q=80', '4.6', 'Observation Deck', 'World\'s busiest pedestrian crosswalk and open-air 360° rooftop observatory.'),
+            ('Dotonbori Canal', 'https://images.unsplash.com/photo-1590559899731-a382839e5549?auto=format&fit=crop&w=350&q=80', '4.7', 'Street Food & Nightlife', 'Neon-lit canal district, iconic Glico running man sign, and fresh takoyaki.')
         ],
         'tokyo': [
-            ('Senso-ji Temple in Historic Asakusa, Tokyo', 'https://images.unsplash.com/photo-1583084501230-e8418044333e?auto=format&fit=crop&w=1200&q=80'),
-            ('Shibuya Crossing & Futuristic Tokyo Skyline', 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=80'),
-            ('Tokyo Tower & Roppongi Cityscape', 'https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?auto=format&fit=crop&w=1200&q=80'),
+            ('Sensō-ji Temple', 'https://images.unsplash.com/photo-1583084501230-e8418044333e?auto=format&fit=crop&w=350&q=80', '4.7', 'Ancient Buddhist Temple', 'Historic temple in Asakusa with iconic giant lantern and market arcade.'),
+            ('Shibuya Crossing & Sky', 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=350&q=80', '4.6', 'City Landmark & Sky View', 'Futuristic skyline vistas, Hachiko monument, and energetic shopping streets.'),
+            ('Tokyo Tower & Cityscape', 'https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?auto=format&fit=crop&w=350&q=80', '4.5', 'Observation Tower', 'Communications and observation tower in the heart of Minato.')
         ],
         'kyoto': [
-            ('Fushimi Inari-taisha Shrine Torii Gates, Kyoto', 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=80'),
-            ('Kinkaku-ji (Golden Pavilion) Zen Temple, Kyoto', 'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=1200&q=80'),
-            ('Arashiyama Soaring Bamboo Forest Grove, Kyoto', 'https://images.unsplash.com/photo-1528164344705-475426879c0d?auto=format&fit=crop&w=1200&q=80'),
+            ('Fushimi Inari-taisha', 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=350&q=80', '4.8', 'Shinto Shrine', '10,000+ vermilion Torii gates winding up sacred Mount Inari.'),
+            ('Kinkaku-ji (Golden Pavilion)', 'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=350&q=80', '4.7', 'Zen Temple', 'Gold-leaf adorned Zen pavilion reflected in the mirror pond.'),
+            ('Arashiyama Bamboo Grove', 'https://images.unsplash.com/photo-1528164344705-475426879c0d?auto=format&fit=crop&w=350&q=80', '4.7', 'Scenic Nature', 'Soaring green bamboo grove paths leading to Tenryu-ji UNESCO temple.')
         ],
         'shanghai': [
-            ('The Bund and Futuristic Lujiazui Skyline, Shanghai', 'https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=80'),
-            ('Classical Yu Garden and Heritage Pavilion, Shanghai', 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80'),
-            ('Zhujiajiao Ancient Water Town Canals, Shanghai', 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1200&q=80'),
+            ('The Bund & Lujiazui', 'https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=350&q=80', '4.7', 'Waterfront Promenade', 'Neoclassical colonial heritage buildings facing futuristic Pudong skyscrapers.'),
+            ('Yu Garden (Yuyuan)', 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=350&q=80', '4.6', 'Classical Ming Garden', '16th-century rockeries, koi ponds, and traditional Chinese pavilions.'),
+            ('Zhujiajiao Water Town', 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=350&q=80', '4.6', 'Ancient Water Canals', 'Traditional wooden boat rides along 400-year-old stone bridges.')
         ],
         'paris': [
-            ('Eiffel Tower and Seine River Promenade, Paris', 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80'),
-            ('Louvre Museum Iconic Glass Pyramid, Paris', 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=1200&q=80'),
-            ('Sacré-Cœur Basilica in Montmartre, Paris', 'https://images.unsplash.com/photo-1522093007474-d86e9bf7ba6f?auto=format&fit=crop&w=1200&q=80'),
+            ('Eiffel Tower', 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=350&q=80', '4.8', 'Iconic Landmark', 'Wrought-iron lattice tower with panoramic city views and Seine promenade.'),
+            ('Louvre Museum', 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=350&q=80', '4.7', 'Art Museum', 'World\'s largest museum featuring the Mona Lisa and glass pyramid entrance.'),
+            ('Sacré-Cœur & Montmartre', 'https://images.unsplash.com/photo-1522093007474-d86e9bf7ba6f?auto=format&fit=crop&w=350&q=80', '4.8', 'Historic Basilica', 'Hilltop Roman Catholic basilica overlooking the romantic streets of Montmartre.')
         ],
         'london': [
-            ('Tower Bridge and River Thames at Twilight, London', 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=80'),
-            ('London Eye and Westminster Palace, London', 'https://images.unsplash.com/photo-1526129318478-62ed807ebdf9?auto=format&fit=crop&w=1200&q=80'),
-            ('Big Ben and Elizabeth Tower Landmark, London', 'https://images.unsplash.com/photo-1529655683826-aba9b3e77383?auto=format&fit=crop&w=1200&q=80'),
+            ('Tower Bridge', 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=350&q=80', '4.8', 'Historic Bridge', 'Iconic Victorian suspension bridge spanning the River Thames.'),
+            ('London Eye', 'https://images.unsplash.com/photo-1526129318478-62ed807ebdf9?auto=format&fit=crop&w=350&q=80', '4.5', 'Observation Wheel', 'Cantilevered observation wheel with 360-degree views of Westminster.'),
+            ('Big Ben & Parliament', 'https://images.unsplash.com/photo-1529655683826-aba9b3e77383?auto=format&fit=crop&w=350&q=80', '4.7', 'Clock Tower & Heritage', 'World-famous neo-Gothic clock tower and British Parliament.')
         ],
         'new york': [
-            ('Times Square and Midtown Manhattan Skyline, New York', 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=1200&q=80'),
-            ('Brooklyn Bridge and Lower Manhattan Skyline', 'https://images.unsplash.com/photo-1518391846015-55a9cc003b25?auto=format&fit=crop&w=1200&q=80'),
-            ('Central Park Bow Bridge & Lake, New York', 'https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=1200&q=80'),
+            ('Central Park', 'https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=350&q=80', '4.8', 'Urban Nature Park', '843-acre green oasis featuring Bow Bridge, Bethesda Terrace, and lakes.'),
+            ('Times Square', 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=350&q=80', '4.6', 'Entertainment Hub', 'Dazzling digital billboards, Broadway theaters, and 24/7 energetic city life.'),
+            ('Brooklyn Bridge', 'https://images.unsplash.com/photo-1518391846015-55a9cc003b25?auto=format&fit=crop&w=350&q=80', '4.8', 'Historic Suspension Bridge', 'Scenic pedestrian promenade with Lower Manhattan skyline vistas.')
         ],
         'singapore': [
-            ('Gardens by the Bay & Supertree Grove, Singapore', 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=80'),
-            ('Jewel Changi Rain Vortex Indoor Waterfall, Singapore', 'https://images.unsplash.com/photo-1565967511849-76a60a516170?auto=format&fit=crop&w=1200&q=80'),
-            ('Marina Bay Sands Infinity SkyPark, Singapore', 'https://images.unsplash.com/photo-1506351421178-63b52a2d2562?auto=format&fit=crop&w=1200&q=80'),
+            ('Gardens by the Bay', 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=350&q=80', '4.8', 'Futuristic Botanical Park', 'Towering Supertrees, Cloud Forest indoor waterfall, and Flower Dome.'),
+            ('Jewel Changi Rain Vortex', 'https://images.unsplash.com/photo-1565967511849-76a60a516170?auto=format&fit=crop&w=350&q=80', '4.8', 'Indoor Waterfall & Canopy', 'World\'s tallest 40m indoor waterfall surrounded by terraced forest.'),
+            ('Marina Bay Sands SkyPark', 'https://images.unsplash.com/photo-1506351421178-63b52a2d2562?auto=format&fit=crop&w=350&q=80', '4.7', 'Observation Deck & Resort', '57th-floor panoramic observation deck and infinity pool.')
         ],
         'barcelona': [
-            ('Sagrada Família Modernist Basilica, Barcelona', 'https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=1200&q=80'),
-            ('Park Güell Colorful Mosaic Serpentine Bench, Barcelona', 'https://images.unsplash.com/photo-1564221710304-0b34c0530899?auto=format&fit=crop&w=1200&q=80'),
+            ('Sagrada Família', 'https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=350&q=80', '4.8', 'Modernist Basilica', 'Antoni Gaudí\'s towering architectural triumph with stunning stained glass.'),
+            ('Park Güell', 'https://images.unsplash.com/photo-1564221710304-0b34c0530899?auto=format&fit=crop&w=350&q=80', '4.6', 'Mosaic Park & Panorama', 'Whimsical organic architecture and colorful serpentine mosaic benches.')
         ],
         'sydney': [
-            ('Sydney Opera House and Harbour Bridge, Sydney', 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=80'),
-            ('Bondi Beach Golden Sands and Waves, Sydney', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80'),
+            ('Sydney Opera House', 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=350&q=80', '4.8', 'Architectural Marvel', 'Sail-shaped performing arts center at Sydney Harbour.'),
+            ('Bondi to Coogee Coastal Walk', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=350&q=80', '4.7', 'Scenic Coastal Trail', '6km cliffside walk overlooking turquoise Pacific ocean waves.')
         ],
         'rome': [
-            ('The Colosseum Ancient Amphitheatre, Rome', 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=80'),
-            ('Trevi Fountain Baroque Marble Landmark, Rome', 'https://images.unsplash.com/photo-1525874684015-58379d421a52?auto=format&fit=crop&w=1200&q=80'),
+            ('The Colosseum', 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=350&q=80', '4.8', 'Ancient Amphitheatre', 'Monumental 2,000-year-old Roman gladiatorial arena and Forum.'),
+            ('Trevi Fountain', 'https://images.unsplash.com/photo-1525874684015-58379d421a52?auto=format&fit=crop&w=350&q=80', '4.7', 'Baroque Marble Fountain', 'Grand Baroque masterpiece famous for the traditional coin toss tradition.')
         ],
         'italy': [
-            ('The Colosseum Ancient Amphitheatre, Rome', 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=80'),
-            ('Venice Grand Canal and Gondolas, Italy', 'https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=1200&q=80'),
-            ('Florence Duomo Cathedral Santa Maria del Fiore', 'https://images.unsplash.com/photo-1543429776-2782fc8e1acd?auto=format&fit=crop&w=1200&q=80'),
+            ('The Colosseum (Rome)', 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=350&q=80', '4.8', 'Ancient Amphitheatre', 'Monumental 2,000-year-old Roman gladiatorial arena.'),
+            ('Venice Grand Canal', 'https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=350&q=80', '4.8', 'Historic Canals', 'Romantic gondola cruises past historic Venetian palazzos.'),
+            ('Florence Duomo Cathedral', 'https://images.unsplash.com/photo-1543429776-2782fc8e1acd?auto=format&fit=crop&w=350&q=80', '4.9', 'Renaissance Cathedral', 'Brunelleschi\'s terracotta-tiled dome and Giotto\'s Campanile.')
         ],
         'switzerland': [
-            ('Matterhorn Alpine Peak in Zermatt, Switzerland', 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=80'),
-            ('Lake Lucerne and Swiss Alpine Mountains', 'https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=1200&q=80'),
+            ('Matterhorn Zermatt', 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=350&q=80', '4.9', 'Alpine Peak & Nature', 'Iconic pyramid mountain peak and premier alpine hiking/skiing.'),
+            ('Lake Lucerne & Alps', 'https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=350&q=80', '4.8', 'Scenic Mountain Lake', 'Historic Chapel Bridge, steamboat cruises, and Mount Pilatus views.')
         ],
         'greece': [
-            ('Oia Sunset and Blue Dome Churches in Santorini, Greece', 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=80'),
-            ('Parthenon on the Acropolis of Athens, Greece', 'https://images.unsplash.com/photo-1555993539-1732b0258235?auto=format&fit=crop&w=1200&q=80'),
+            ('Oia Sunset (Santorini)', 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=350&q=80', '4.9', 'Cycladic Village & Coast', 'Whitewashed cliffside houses and blue-domed churches over the Aegean Sea.'),
+            ('Acropolis & Parthenon (Athens)', 'https://images.unsplash.com/photo-1555993539-1732b0258235?auto=format&fit=crop&w=350&q=80', '4.8', 'Ancient Citadel', '5th-century BC monumental temple dedicated to goddess Athena.')
         ],
         'dubai': [
-            ('Burj Khalifa and Downtown Dubai Skyline', 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80'),
-            ('Dubai Desert Safari and Golden Sand Dunes', 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80'),
-        ],
-        'egypt': [
-            ('Great Pyramids of Giza and Sphinx, Egypt', 'https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1200&q=80'),
-        ],
-        'india': [
-            ('Taj Mahal White Marble Monument in Agra, India', 'https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1200&q=80'),
-            ('Hawa Mahal (Palace of Winds) in Jaipur, India', 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80'),
+            ('Burj Khalifa', 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=350&q=80', '4.8', 'Skyscraper & Observatory', 'World\'s tallest building with observation decks over the Arabian Gulf.'),
+            ('Desert Safari & Golden Dunes', 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=350&q=80', '4.7', 'Desert Adventure', 'Golden dunes, camel riding, and traditional Bedouin camp dining.')
         ],
         'bali': [
-            ('Uluwatu Cliffside Sea Temple, Bali', 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=80'),
-            ('Tegallalang Emerald Rice Terraces in Ubud, Bali', 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1200&q=80'),
-        ],
-        'hawaii': [
-            ('Waikiki Beach and Diamond Head Crater, Hawaii', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80'),
-            ('Na Pali Coast Emerald Sea Cliffs in Kauai, Hawaii', 'https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=1200&q=80'),
+            ('Uluwatu Cliff Temple', 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=350&q=80', '4.7', 'Cliffside Sea Temple', 'Dramatic 70m ocean cliff temple with traditional Kecak fire dance.'),
+            ('Tegallalang Rice Terraces', 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=350&q=80', '4.6', 'Scenic Terraces in Ubud', 'Lush emerald green terraced valleys with traditional Subak irrigation.')
         ],
         'bangkok': [
-            ('Grand Palace and Emerald Buddha Temple, Bangkok', 'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=80'),
-            ('Wat Arun (Temple of Dawn) along Chao Phraya River', 'https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=1200&q=80'),
+            ('Grand Palace & Emerald Buddha', 'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=350&q=80', '4.7', 'Royal Temple Complex', 'Ornate gold-leaf architecture and Thailand\'s most sacred Emerald Buddha.'),
+            ('Wat Arun (Temple of Dawn)', 'https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=350&q=80', '4.8', 'Riverside Buddhist Temple', 'Porcelain-encrusted riverfront pagoda overlooking the Chao Phraya.')
         ],
-        'seoul': [
-            ('Gyeongbokgung Palace and Bukchon Hanok Village, Seoul', 'https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1200&q=80'),
-            ('N Seoul Tower and Cityscape at Twilight, Seoul', 'https://images.unsplash.com/photo-1546874177-9e664107314e?auto=format&fit=crop&w=1200&q=80'),
+        'india': [
+            ('Taj Mahal (Agra)', 'https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=350&q=80', '4.9', 'UNESCO World Wonder', 'Iconic ivory-white marble mausoleum on the south bank of the Yamuna River.'),
+            ('Hawa Mahal (Jaipur)', 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=350&q=80', '4.6', 'Royal Heritage Palace', 'Pink sandstone Palace of Winds featuring 953 intricate jharokha windows.')
+        ],
+        'goa': [
+            ('Palolem & South Goa Beaches', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=350&q=80', '4.7', 'Tropical Coastline', 'Crescent-shaped golden sand beach with calm waters and palm-fringed shacks.'),
+            ('Basilica of Bom Jesus', 'https://images.unsplash.com/photo-1583084501230-e8418044333e?auto=format&fit=crop&w=350&q=80', '4.6', 'UNESCO World Heritage', '16th-century baroque church holding the sacred relics of St. Francis Xavier.')
+        ],
+        'manali': [
+            ('Solang Valley & Rohtang Pass', 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=350&q=80', '4.8', 'Himalayan Mountain Pass', 'Snow-capped peaks, paragliding, and scenic high-altitude passes.'),
+            ('Hadimba Temple', 'https://images.unsplash.com/photo-1528164344705-475426879c0d?auto=format&fit=crop&w=350&q=80', '4.6', 'Cedar Forest Temple', 'Unique four-tiered pagoda temple surrounded by towering deodar cedar trees.')
+        ],
+        'kerala': [
+            ('Alleppey Backwaters', 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=350&q=80', '4.8', 'Houseboat Cruise & Lagoons', 'Serene palm-fringed canals, luxury houseboats, and backwater lagoons.'),
+            ('Munnar Tea Plantations', 'https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=350&q=80', '4.8', 'Hill Station & Mist', 'Rolling emerald tea estate slopes, waterfalls, and cool mountain climate.')
+        ],
+        'iceland': [
+            ('Gullfoss Waterfall & Geysir', 'https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=350&q=80', '4.9', 'Golden Circle Waterfall', 'Iconic two-tiered glacial waterfall and geothermal geysers.'),
+            ('Blue Lagoon & Aurora Borealis', 'https://images.unsplash.com/photo-1529963183134-61a90db47eaf?auto=format&fit=crop&w=350&q=80', '4.8', 'Geothermal Spa & Northern Lights', 'Mineral-rich geothermal waters set against volcanic black lava fields.')
+        ],
+        'maldives': [
+            ('Overwater Bungalow Lagoons', 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=350&q=80', '4.9', 'Private Island Resort', 'Crystal-clear turquoise lagoons, coral reefs, and luxury overwater villas.'),
+            ('Bioluminescent Beach & Coral Reefs', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=350&q=80', '4.8', 'Marine Sanctuary', 'World-class snorkeling, manta ray encounters, and glowing night plankton.')
+        ],
+        'amsterdam': [
+            ('Canal Ring & Heritage Bridges', 'https://images.unsplash.com/photo-1534351590666-13e3e96b5017?auto=format&fit=crop&w=350&q=80', '4.8', 'UNESCO Historic Canals', '17th-century historic canal ring, bicycle bridges, and merchant houses.'),
+            ('Rijksmuseum & Van Gogh Museum', 'https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=350&q=80', '4.7', 'Art & National Heritage', 'Dutch Golden Age masterworks by Rembrandt, Vermeer, and Van Gogh.')
+        ],
+        'turkey': [
+            ('Hagia Sophia & Blue Mosque', 'https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=350&q=80', '4.8', 'Historic Byzantine Monument', 'Grand architectural dome blending Byzantine Christian and Ottoman Islamic history.'),
+            ('Cappadocia Hot Air Balloons', 'https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=350&q=80', '4.9', 'Fairy Chimneys & Sunrise Flight', 'Breathtaking sunrise hot air balloon flights over volcanic rock valleys.')
         ]
     }
 
     def _get_landmark_photos_markdown(self, dest: str) -> str:
         d = dest.lower()
-        photos = []
+        items = []
+        COUNTRY_KEYS = {'india', 'italy', 'japan', 'france', 'uk', 'usa', 'china', 'spain'}
+        # 1. Check specific cities/regions first (e.g. 'goa', 'manali', 'tokyo', 'kyoto', 'kerala')
         for key, p_list in self.LANDMARK_PHOTO_REGISTRY.items():
-            if key in d:
-                photos = p_list
+            if key not in COUNTRY_KEYS and key in d:
+                items = p_list
                 break
-        if not photos:
-            photos = [
-                (f"Historic Architecture and City Promenade in {dest.title()}", "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=80"),
-                (f"Scenic Landmarks and Cultural Quarter of {dest.title()}", "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80")
+        # 2. Check country keys fallback
+        if not items:
+            for key, p_list in self.LANDMARK_PHOTO_REGISTRY.items():
+                if key in d:
+                    items = p_list
+                    break
+        # 3. Dynamic Fallback
+        if not items:
+            items = [
+                (f"{dest.title()} Historic Quarter & Promenade", "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=350&q=80", "4.8", "Historic Landmark", f"Premier heritage architecture and vibrant cultural streets of {dest.title()}."),
+                (f"{dest.title()} Scenic Viewpoint & Natural Panorama", "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=350&q=80", "4.7", "Scenic Viewpoint", f"Scenic landscape vistas, photography hotspots, and top attractions in {dest.title()}.")
             ]
-        md = "### 📸 Featured Visual Gallery: Iconic Places to Visit\n\n"
-        for title, url in photos[:3]:
-            md += f"![{title}]({url})\n\n"
+        
+        md = "### 📸 Recommended Places & Landmark Highlights\n\n"
+        md += "| Place Photo | Landmark & Category | Overview & Highlights |\n"
+        md += "| :---: | :--- | :--- |\n"
+        for name, url, rating, cat, highlight in items:
+            md += f"| ![{name}]({url}) | **{name}**<br>⭐ **{rating}** · *{cat}* | {highlight} |\n"
         return md.strip()
 
     def _normalize_query_and_correct_typos(self, text: str) -> str:
@@ -3607,7 +3637,10 @@ int main() {
             'dubai': 'Dubai, UAE', 'istanbul': 'Istanbul, Turkey',
             'hong kong': 'Hong Kong', 'taipei': 'Taipei, Taiwan',
             'mumbai': 'Mumbai, India', 'delhi': 'Delhi, India', 'goa': 'Goa, India',
-            'jaipur': 'Jaipur, India', 'kerala': 'Kerala, India',
+            'jaipur': 'Jaipur, India', 'kerala': 'Kerala, India', 'manali': 'Manali, Himachal Pradesh',
+            'ladakh': 'Ladakh, India', 'shimla': 'Shimla, India', 'rishikesh': 'Rishikesh, India',
+            'ooty': 'Ooty, India', 'darjeeling': 'Darjeeling, India', 'agra': 'Agra, India',
+            'varanasi': 'Varanasi, India', 'udaipur': 'Udaipur, India',
             'bangalore': 'Bangalore, India', 'bengaluru': 'Bangalore, India',
             'hanoi': 'Hanoi, Vietnam', 'ho chi minh': 'Ho Chi Minh City, Vietnam',
             'lisbon': 'Lisbon, Portugal', 'prague': 'Prague, Czech Republic',
@@ -3664,6 +3697,14 @@ int main() {
         for key in sorted(countries.keys(), key=len, reverse=True):
             if re.search(r'\b' + re.escape(key) + r'\b', q_lower):
                 return countries[key]
+
+        # Dynamic regex fallback for any custom destination ("trip to X", "vacation to X", "itinerary for X")
+        dynamic_match = re.search(r'\b(?:trip|vacation|itinerary|travel|holiday|visit|tour)\s+(?:to|in|for)\s+([A-Za-z\s]+?)(?:\s+(?:for|in|\d+|days?|with|on|guide)|$)', q_lower)
+        if dynamic_match:
+            candidate = dynamic_match.group(1).strip()
+            candidate_clean = re.sub(r'\b(a|an|the|my|our|some)\b', '', candidate).strip()
+            if candidate_clean and len(candidate_clean) >= 3 and not any(w in candidate_clean for w in ['cheap', 'best', 'good', 'budget', 'family', 'weekend', 'day', 'days']):
+                return candidate_clean.title()
 
         return None
 
@@ -4032,6 +4073,8 @@ int main() {
 
         # Check for Image Generation Intent
         latest_subquery = query.split("=>")[-1].strip().lower() if "=>" in query else q_lower
+        latest_is_price = any(w in latest_subquery for w in ["price", "cost", "how much", "fare", "budget", "pricing"])
+        is_tech_topic = any(w in q_lower for w in ["algorithm", "code", "python", "javascript", "react", "docker", "sql", "git", "api", "function", "data structure"])
         is_info_or_travel = bool(re.search(r'\b(what|who|where|when|why|how|explain|tell|give|pricing|price|cost|costs|budget|budgets|rupee|rupees|inr|usd|dollar|dollars|currency|itinerary|travel|trip|vacation|hotel|hotels|flight|flights|visit|places|code|function|python|yes|no|ok|sure|more|details)\b', latest_subquery))
         
         is_image_req = not is_info_or_travel and bool(re.search(r'\b(generate|create|draw|paint|make|show|render)\s+(me\s+)?(an?\s+)?(picture|image|photo|illustration|drawing|sketch|artwork|wallpaper)\b', latest_subquery))
@@ -4770,13 +4813,13 @@ Here is the definitive ranked selection of top English-language cinema masterpie
         if 'kyoto' in dest_clean.lower() or ('kyoto' in query.lower() and 'golden route' not in combined):
             return """## 🇯🇵 Kyoto 3-Day Cultural Travel Itinerary
 
-### 📸 Featured Visual Gallery: Iconic Kyoto Landmarks
+### 📸 Recommended Places & Landmark Highlights
 
-![Fushimi Inari-taisha Shrine Torii Gates, Kyoto](https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=80)
-
-![Kinkaku-ji (Golden Pavilion) Zen Temple, Kyoto](https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=1200&q=80)
-
-![Arashiyama Soaring Bamboo Forest Grove, Kyoto](https://images.unsplash.com/photo-1528164344705-475426879c0d?auto=format&fit=crop&w=1200&q=80)
+| Place Photo | Landmark & Category | Overview & Highlights |
+| :---: | :--- | :--- |
+| ![Fushimi Inari](https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=350&q=80) | **Fushimi Inari-taisha**<br>⭐ **4.8** · *Shinto Shrine* | 10,000+ vermilion Torii gates winding up sacred Mount Inari. |
+| ![Kinkaku-ji](https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=350&q=80) | **Kinkaku-ji (Golden Pavilion)**<br>⭐ **4.7** · *Zen Temple* | Gold-leaf adorned Zen pavilion reflected in the mirror pond (*Kyoko-chi*). |
+| ![Arashiyama](https://images.unsplash.com/photo-1528164344705-475426879c0d?auto=format&fit=crop&w=350&q=80) | **Arashiyama Bamboo Grove**<br>⭐ **4.7** · *Scenic Nature* | Soaring green bamboo grove paths leading to Tenryu-ji UNESCO temple. |
 
 ---
 
@@ -4850,11 +4893,12 @@ Here is the definitive ranked selection of top English-language cinema masterpie
         if 'tokyo' in dest_clean.lower() or ('tokyo' in query.lower() and 'golden route' not in combined):
             return """## 🇯🇵 Tokyo 3-Day Ultimate Travel Itinerary
 
-### 📸 Featured Visual Gallery: Iconic Tokyo Highlights
+### 📸 Recommended Places & Landmark Highlights
 
-![Senso-ji Temple in Historic Asakusa, Tokyo](https://images.unsplash.com/photo-1583084501230-e8418044333e?auto=format&fit=crop&w=1200&q=80)
-
-![Shibuya Crossing & Futuristic Tokyo Skyline](https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=80)
+| Place Photo | Landmark & Category | Overview & Highlights |
+| :---: | :--- | :--- |
+| ![Senso-ji](https://images.unsplash.com/photo-1583084501230-e8418044333e?auto=format&fit=crop&w=350&q=80) | **Sensō-ji Temple**<br>⭐ **4.7** · *Ancient Buddhist Temple (Asakusa)* | Tokyo's oldest temple, Kaminarimon thunder gate & Nakamise-dori shopping street. |
+| ![Shibuya Crossing](https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=350&q=80) | **Shibuya Sky & Crossing**<br>⭐ **4.6** · *City Landmark & Observatory* | Iconic pedestrian scramble, Hachiko statue & Shibuya Sky 360° rooftop views. |
 
 ---
 
@@ -4914,15 +4958,15 @@ Here is the definitive ranked selection of top English-language cinema masterpie
             if num_days >= 6 or '8' in combined or 'vacation' in combined or 'golden route' in combined:
                 return """## 🇯🇵 Japan 8-Day Ultimate Golden Route Vacation & Travel Guide
 
-### 📸 Featured Visual Gallery: Iconic Places to Visit
+### 📸 Recommended Places & Landmark Highlights
 
-![Fushimi Inari-taisha Shrine Torii Gates, Kyoto](https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=80)
-
-![Mount Fuji and Lake Ashi in Hakone](https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?auto=format&fit=crop&w=1200&q=80)
-
-![Shibuya Crossing & Tokyo Skyline](https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=80)
-
-![Dotonbori Neon Street and Canal, Osaka](https://images.unsplash.com/photo-1590559899731-a382839e5549?auto=format&fit=crop&w=1200&q=80)
+| Place Photo | Landmark & Category | Overview & Highlights |
+| :---: | :--- | :--- |
+| ![Sensō-ji](https://images.unsplash.com/photo-1583084501230-e8418044333e?auto=format&fit=crop&w=350&q=80) | **Sensō-ji Temple**<br>⭐ **4.7** · *Buddhist Temple (Asakusa, Tokyo)* | Tokyo's oldest temple featuring the Kaminarimon gate and bustling Nakamise-dori shopping street. |
+| ![Fushimi Inari](https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=350&q=80) | **Fushimi Inari-taisha**<br>⭐ **4.8** · *Shinto Shrine (Kyoto)* | 10,000+ iconic vermilion Torii gates winding up sacred Mount Inari with serene forest paths. |
+| ![Mount Fuji](https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?auto=format&fit=crop&w=350&q=80) | **Mount Fuji & Lake Ashi**<br>⭐ **4.9** · *Volcano & Lake (Hakone)* | Scenic lake cruises with Mount Fuji backdrop, Hakone Ropeway, and volcanic onsen springs. |
+| ![Shibuya Crossing](https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=350&q=80) | **Shibuya Sky & Crossing**<br>⭐ **4.6** · *Observation Deck (Tokyo)* | World's busiest pedestrian crossing paired with a 360-degree open-air rooftop observatory. |
+| ![Dotonbori](https://images.unsplash.com/photo-1590559899731-a382839e5549?auto=format&fit=crop&w=350&q=80) | **Dotonbori Canal**<br>⭐ **4.7** · *Entertainment District (Osaka)* | Kansai's street food capital famous for neon signs, Glico running man, and fresh takoyaki. |
 
 ---
 
@@ -5091,13 +5135,10 @@ Here is the definitive ranked selection of top English-language cinema masterpie
 
         # Specialized Paris Guide
         if 'paris' in dest_clean.lower():
-            return """## 🇫🇷 Paris 3-Day Ultimate Travel Itinerary
+            photos_sec = self._get_landmark_photos_markdown('paris')
+            return f"""## 🇫🇷 Paris 3-Day Ultimate Travel Itinerary
 
-### 📸 Featured Visual Gallery: Iconic Paris Landmarks
-
-![Eiffel Tower and Seine River Promenade, Paris](https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80)
-
-![Louvre Museum Iconic Glass Pyramid, Paris](https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=1200&q=80)
+{photos_sec}
 
 ---
 
@@ -5153,13 +5194,10 @@ Here is the definitive ranked selection of top English-language cinema masterpie
 
         # Specialized New York Guide
         if 'new york' in dest_clean.lower() or 'nyc' in dest_clean.lower() or 'manhattan' in dest_clean.lower():
-            return """## 🇺🇸 New York City 3-Day Ultimate Travel Itinerary
+            photos_sec = self._get_landmark_photos_markdown('new york')
+            return f"""## 🇺🇸 New York City 3-Day Ultimate Travel Itinerary
 
-### 📸 Featured Visual Gallery: Iconic NYC Landmarks
-
-![Times Square and Midtown Manhattan Skyline, New York](https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=1200&q=80)
-
-![Brooklyn Bridge and Lower Manhattan Skyline](https://images.unsplash.com/photo-1518391846015-55a9cc003b25?auto=format&fit=crop&w=1200&q=80)
+{photos_sec}
 
 ---
 
@@ -5217,13 +5255,10 @@ Here is the definitive ranked selection of top English-language cinema masterpie
 
         # Specialized London Guide
         if 'london' in dest_clean.lower():
-            return """## 🇬🇧 London 3-Day Ultimate Travel Itinerary
+            photos_sec = self._get_landmark_photos_markdown('london')
+            return f"""## 🇬🇧 London 3-Day Ultimate Travel Itinerary
 
-### 📸 Featured Visual Gallery: Iconic London Landmarks
-
-![Tower Bridge and River Thames at Twilight, London](https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=80)
-
-![London Eye and Westminster Palace, London](https://images.unsplash.com/photo-1526129318478-62ed807ebdf9?auto=format&fit=crop&w=1200&q=80)
+{photos_sec}
 
 ---
 
@@ -5280,13 +5315,10 @@ Here is the definitive ranked selection of top English-language cinema masterpie
 
         # Specialized Rome Guide
         if 'rome' in dest_clean.lower():
-            return """## 🇮🇹 Rome 3-Day Ultimate Travel Itinerary
+            photos_sec = self._get_landmark_photos_markdown('rome')
+            return f"""## 🇮🇹 Rome 3-Day Ultimate Travel Itinerary
 
-### 📸 Featured Visual Gallery: Iconic Rome Landmarks
-
-![The Colosseum Ancient Amphitheatre, Rome](https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=80)
-
-![Trevi Fountain Baroque Marble Landmark, Rome](https://images.unsplash.com/photo-1525874684015-58379d421a52?auto=format&fit=crop&w=1200&q=80)
+{photos_sec}
 
 ---
 
@@ -5343,13 +5375,10 @@ Here is the definitive ranked selection of top English-language cinema masterpie
 
         # Specialized Barcelona Guide
         if 'barcelona' in dest_clean.lower():
-            return """## 🇪🇸 Barcelona 3-Day Ultimate Travel Itinerary
+            photos_sec = self._get_landmark_photos_markdown('barcelona')
+            return f"""## 🇪🇸 Barcelona 3-Day Ultimate Travel Itinerary
 
-### 📸 Featured Visual Gallery: Iconic Barcelona Landmarks
-
-![Sagrada Família Modernist Basilica, Barcelona](https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=1200&q=80)
-
-![Park Güell Colorful Mosaic Serpentine Bench, Barcelona](https://images.unsplash.com/photo-1564221710304-0b34c0530899?auto=format&fit=crop&w=1200&q=80)
+{photos_sec}
 
 ---
 
@@ -5406,13 +5435,10 @@ Here is the definitive ranked selection of top English-language cinema masterpie
 
         # Specialized Singapore Guide
         if 'singapore' in dest_clean.lower():
-            return """## 🇸🇬 Singapore 3-Day Ultimate Travel Itinerary
+            photos_sec = self._get_landmark_photos_markdown('singapore')
+            return f"""## 🇸🇬 Singapore 3-Day Ultimate Travel Itinerary
 
-### 📸 Featured Visual Gallery: Iconic Singapore Landmarks
-
-![Gardens by the Bay & Supertree Grove, Singapore](https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=80)
-
-![Jewel Changi Rain Vortex Indoor Waterfall, Singapore](https://images.unsplash.com/photo-1565967511849-76a60a516170?auto=format&fit=crop&w=1200&q=80)
+{photos_sec}
 
 ---
 
@@ -5468,13 +5494,10 @@ Here is the definitive ranked selection of top English-language cinema masterpie
 
         # Specialized Sydney Guide
         if 'sydney' in dest_clean.lower():
-            return """## 🇦🇺 Sydney 3-Day Ultimate Travel Itinerary
+            photos_sec = self._get_landmark_photos_markdown('sydney')
+            return f"""## 🇦🇺 Sydney 3-Day Ultimate Travel Itinerary
 
-### 📸 Featured Visual Gallery: Iconic Sydney Landmarks
-
-![Sydney Opera House and Harbour Bridge, Sydney](https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=80)
-
-![Bondi Beach Golden Sands and Waves, Sydney](https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80)
+{photos_sec}
 
 ---
 
@@ -5531,13 +5554,10 @@ Here is the definitive ranked selection of top English-language cinema masterpie
 
         # Specialized Shanghai Guide
         if 'shanghai' in dest_clean.lower() or 'shangai' in dest_clean.lower():
-            return """## 🇨🇳 Shanghai 3-Day Ultimate Travel Itinerary
+            photos_sec = self._get_landmark_photos_markdown('shanghai')
+            return f"""## 🇨🇳 Shanghai 3-Day Ultimate Travel Itinerary
 
-### 📸 Featured Visual Gallery: Iconic Places to Visit
-
-![The Bund and Futuristic Lujiazui Skyline, Shanghai](https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=80)
-
-![Classical Yu Garden and Heritage Pavilion, Shanghai](https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80)
+{photos_sec}
 
 ---
 

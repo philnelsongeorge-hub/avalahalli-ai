@@ -178,33 +178,31 @@ st.markdown(f"""
         font-size: 0.95rem !important;
     }}
 
-    /* Replace sidebar collapse/expand double-arrows with 3-Lines Hamburger Menu (☰) */
-    button[data-testid="stSidebarCollapseButton"] svg,
-    button[data-testid="baseButton-header"] svg,
-    div[data-testid="collapsedControl"] svg,
-    button[kind="header"] svg {{
-        display: none !important;
-    }}
-
-    button[data-testid="stSidebarCollapseButton"]::after,
-    button[data-testid="baseButton-header"]::after,
-    div[data-testid="collapsedControl"]::after,
-    button[kind="header"]::after {{
-        content: "☰" !important;
-        font-size: 1.35rem !important;
-        color: #94a3b8 !important;
+    /* Gemini-Style Compact Place Card Thumbnails */
+    .stChatMessage img {{
+        max-width: 150px !important;
+        max-height: 105px !important;
+        width: 150px !important;
+        height: 100px !important;
+        object-fit: cover !important;
+        border-radius: 14px !important;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
+        margin: 4px 8px 4px 0 !important;
         display: inline-block !important;
-        line-height: 1 !important;
-        font-weight: bold !important;
-        transition: all 0.2s ease !important;
+        transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease !important;
     }}
 
-    button[data-testid="stSidebarCollapseButton"]:hover::after,
-    button[data-testid="baseButton-header"]:hover::after,
-    div[data-testid="collapsedControl"]:hover::after,
-    button[kind="header"]:hover::after {{
-        color: #38bdf8 !important;
-        transform: scale(1.15) !important;
+    .stChatMessage img:hover {{
+        transform: scale(1.06) !important;
+        box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4) !important;
+    }}
+
+    /* Main Page Suggestion Cards Styling (ChatGPT/Gemini Style) */
+    .suggestion-grid {{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 12px;
+        margin: 20px 0 30px 0;
     }}
     
     /* Header Styling */
@@ -240,6 +238,108 @@ st.markdown(f"""
     .badge-travel {{ background: #f59e0b; color: white; }}
     .badge-creative {{ background: #ec4899; color: white; }}
     .badge-academic {{ background: #06b6d4; color: white; }}
+
+    /* Subscription Modal & Pricing Cards */
+    .plan-card {{
+        background: rgba(30, 41, 59, 0.75);
+        border-radius: 18px;
+        padding: 22px 18px;
+        min-height: 480px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        margin-bottom: 12px;
+    }}
+    .plan-free {{
+        border: 1px solid rgba(148, 163, 184, 0.25);
+    }}
+    .plan-pro {{
+        border: 1.5px solid rgba(56, 189, 248, 0.6);
+        background: linear-gradient(180deg, rgba(14, 165, 233, 0.12) 0%, rgba(30, 41, 59, 0.85) 100%);
+        box-shadow: 0 8px 30px rgba(56, 189, 248, 0.2);
+    }}
+    .plan-ultra {{
+        border: 1.5px solid rgba(192, 132, 252, 0.75);
+        background: linear-gradient(180deg, rgba(168, 85, 247, 0.18) 0%, rgba(30, 41, 59, 0.9) 100%);
+        box-shadow: 0 8px 32px rgba(168, 85, 247, 0.25);
+    }}
+    .plan-badge {{
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        padding: 4px 10px;
+        border-radius: 20px;
+        display: inline-block;
+        margin-bottom: 10px;
+    }}
+    .badge-free-tag {{
+        background: rgba(148, 163, 184, 0.18);
+        color: #cbd5e1;
+    }}
+    .badge-pro-tag {{
+        background: rgba(56, 189, 248, 0.2);
+        color: #38bdf8;
+    }}
+    .badge-ultra-tag {{
+        background: linear-gradient(90deg, #a855f7 0%, #ec4899 100%);
+        color: #ffffff;
+    }}
+    .plan-title {{
+        font-size: 1.45rem;
+        font-weight: 800;
+        color: #f8fafc;
+        margin-bottom: 2px;
+    }}
+    .plan-price {{
+        font-size: 1.75rem;
+        font-weight: 800;
+        color: #f8fafc;
+        margin-bottom: 6px;
+    }}
+    .plan-price span {{
+        font-size: 0.85rem;
+        color: #94a3b8;
+        font-weight: 400;
+    }}
+    .plan-desc {{
+        font-size: 0.83rem;
+        color: #94a3b8;
+        line-height: 1.35;
+        min-height: 38px;
+    }}
+    .ultra-slogan-box {{
+        background: linear-gradient(135deg, rgba(234, 179, 8, 0.18) 0%, rgba(249, 115, 22, 0.22) 100%);
+        border: 1px dashed rgba(251, 191, 36, 0.85);
+        border-radius: 10px;
+        padding: 8px 10px;
+        margin: 10px 0;
+        color: #fef08a;
+        font-size: 0.85rem;
+        text-align: center;
+        box-shadow: 0 2px 12px rgba(234, 179, 8, 0.2);
+    }}
+    .plan-divider {{
+        border: 0;
+        height: 1px;
+        background: rgba(148, 163, 184, 0.15);
+        margin: 12px 0;
+    }}
+    .plan-features {{
+        list-style: none;
+        padding: 0;
+        margin: 0 0 16px 0;
+        font-size: 0.82rem;
+        color: #cbd5e1;
+    }}
+    .plan-features li {{
+        margin-bottom: 7px;
+        display: flex;
+        align-items: flex-start;
+        gap: 6px;
+    }}
 </style>
 """, unsafe_allow_html=True)
 
@@ -254,6 +354,8 @@ engine = AvalahalliEngine()
 # --- INITIALIZE SESSION STATE ---
 if "messages" not in st.session_state:
     st.session_state.messages = []
+if "chat_history" not in st.session_state:
+    st.session_state.chat_history = []
 if "uploaded_context" not in st.session_state:
     st.session_state.uploaded_context = ""
 if "persona" not in st.session_state:
@@ -262,7 +364,7 @@ if "query_count" not in st.session_state:
     st.session_state.query_count = 0
 
 def handle_user_query(query_text):
-    """Unified handler for user queries from chat input or quick suggestion buttons."""
+    """Unified handler for user queries from chat input or main page suggestion cards."""
     if not query_text or not query_text.strip():
         return
     
@@ -308,10 +410,43 @@ PERSONAS = {
     "College Advisor": {"icon": "🎓", "badge": "badge-academic", "desc": "College rankings, courses, placements, and campus guides."}
 }
 
-# --- SIDEBAR CONTROLS ---
+# --- SIDEBAR: NEW CHAT, CHAT HISTORY & SETTINGS ---
 with st.sidebar:
     st.markdown("## ⚡ **Avalahalli AI**")
-    st.markdown("*Clean & Fast Assistant*")
+    
+    # ➕ New Chat Button (Starts a fresh conversation & archives previous)
+    if st.button("➕ **New Chat**", use_container_width=True, type="primary"):
+        if st.session_state.messages:
+            first_msg = st.session_state.messages[0]["content"]
+            title = (first_msg[:24] + "..") if len(first_msg) > 24 else first_msg
+            st.session_state.chat_history.insert(0, {
+                "id": str(time.time()),
+                "title": title,
+                "messages": list(st.session_state.messages)
+            })
+            st.session_state.chat_history = st.session_state.chat_history[:15]
+        st.session_state.messages = []
+        st.session_state.query_count = 0
+        st.rerun()
+        
+    st.divider()
+    
+    # 💬 Chat History Section
+    st.markdown("### 💬 **Chat History**")
+    if st.session_state.chat_history:
+        for h_idx, hist in enumerate(st.session_state.chat_history):
+            c_h1, c_h2 = st.columns([0.82, 0.18])
+            with c_h1:
+                if st.button(f"🗨️ {hist['title']}", key=f"hist_btn_{h_idx}", use_container_width=True):
+                    st.session_state.messages = list(hist["messages"])
+                    st.rerun()
+            with c_h2:
+                if st.button("✕", key=f"hist_del_{h_idx}", help="Delete chat"):
+                    st.session_state.chat_history.pop(h_idx)
+                    st.rerun()
+    else:
+        st.caption("No previous chats yet. Your conversations will be saved here!")
+        
     st.divider()
     
     # Persona Selector
@@ -326,33 +461,103 @@ with st.sidebar:
     
     st.divider()
     
-    # Quick Starters (Instant 1-Click Execution)
-    st.markdown("### 💡 **Quick Questions**")
-    quick_prompts = [
-        "🍖 Best mutton shops in Avalahalli",
-        "📺 Top 10 TV shows of all time",
-        "✈️ Plan me a 8 day vacation to Japan",
-        "🎓 Best colleges in Bangalore",
-        "🏛️ Is CIT Bangalore a good college",
-        "💻 Write debounce and throttle in typescript",
-        "🔬 How does CRISPR-Cas9 gene editing work",
-        "⚖️ Compare React vs Vue"
-    ]
-    
-    for qp in quick_prompts:
-        clean_text = qp.split(" ", 1)[1] if " " in qp else qp
-        if st.button(qp, use_container_width=True, key=f"quick_btn_{clean_text}"):
-            handle_user_query(clean_text)
-            
-    st.divider()
-    
     # Budget Currency Setting
     preferred_currency = st.selectbox("💱 Travel Currency", ["₹ Rupees (INR)", "$ Dollars (USD)", "€ Euros (EUR)"])
     
-    if st.button("🗑️ Clear Chat", use_container_width=True):
+    if st.button("💎 **Subscription Plans**", use_container_width=True, help="View Free, Pro, and Ultra tiers"):
+        st.session_state.open_sub_modal = True
+        
+    if st.button("🗑️ Clear Current Chat", use_container_width=True):
         st.session_state.messages = []
         st.session_state.query_count = 0
         st.rerun()
+
+# --- SUBSCRIPTION PLANS MODAL (FREE, PRO & ULTRA) ---
+@st.dialog("💎 Avalahalli AI — Subscription Plans", width="large")
+def show_subscription_modal():
+    st.markdown("""
+    <div style="text-align: center; margin-bottom: 22px;">
+        <h3 style="margin: 0; color: #f8fafc; font-weight: 700;">Choose the Perfect Intelligence Tier</h3>
+        <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 4px;">Unlock advanced reasoning, higher rate limits, and lightning-fast inference.</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    col_free, col_pro, col_ultra = st.columns(3)
+    
+    # 1. FREE PLAN
+    with col_free:
+        st.markdown("""
+        <div class="plan-card plan-free">
+            <div>
+                <div class="plan-badge badge-free-tag">CURRENT PLAN</div>
+                <div class="plan-title">Free</div>
+                <div class="plan-price">₹0 <span>/ month</span></div>
+                <div class="plan-desc">Essential AI assistance for everyday conversations and queries.</div>
+                <hr class="plan-divider"/>
+                <ul class="plan-features">
+                    <li>✅ Standard reasoning model</li>
+                    <li>✅ 6 Specialized Persona assistants</li>
+                    <li>✅ Real-time web search</li>
+                    <li>✅ Travel itineraries & rich tables</li>
+                    <li>✅ Standard response speed</li>
+                    <li>✅ Community support</li>
+                </ul>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        st.button("Active Plan", key="btn_free_plan", use_container_width=True, disabled=True)
+        
+    # 2. PRO PLAN
+    with col_pro:
+        st.markdown("""
+        <div class="plan-card plan-pro">
+            <div>
+                <div class="plan-badge badge-pro-tag">⭐ MOST POPULAR</div>
+                <div class="plan-title">Pro</div>
+                <div class="plan-price">₹499 <span>/ month</span></div>
+                <div class="plan-desc">For power users, developers, and researchers demanding faster execution.</div>
+                <hr class="plan-divider"/>
+                <ul class="plan-features">
+                    <li>✅ <strong>Everything in Free</strong></li>
+                    <li>✅ <strong>2x Accelerated Turbo inference</strong></li>
+                    <li>✅ Full Algorithmic code synthesis</li>
+                    <li>✅ Unlimited Document QA & RAG</li>
+                    <li>✅ Priority peak-hour server throughput</li>
+                    <li>✅ High-resolution image generation</li>
+                </ul>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("🚀 Upgrade to Pro", key="btn_pro_plan", use_container_width=True, type="secondary"):
+            st.success("🎉 Selected Pro Plan! Enjoy 2x Turbo Speed.")
+            
+    # 3. ULTRA PLAN (with slogan "⚡ Answers fast like kudum-kudum")
+    with col_ultra:
+        st.markdown("""
+        <div class="plan-card plan-ultra">
+            <div>
+                <div class="plan-badge badge-ultra-tag">👑 ULTIMATE POWER</div>
+                <div class="plan-title">Ultra</div>
+                <div class="plan-price">₹1,499 <span>/ month</span></div>
+                <div class="plan-desc">Maximum cognitive horsepower with zero-latency response generation.</div>
+                <div class="ultra-slogan-box">
+                    ⚡ <strong>Answers fast like kudum-kudum</strong>
+                </div>
+                <hr class="plan-divider"/>
+                <ul class="plan-features">
+                    <li>✅ <strong>Everything in Pro</strong></li>
+                    <li>✅ <strong>Ultra 2.0 Thinking & Deep Reasoning</strong></li>
+                    <li>✅ Dedicated high-priority GPU cluster</li>
+                    <li>✅ Zero-latency instant responses</li>
+                    <li>✅ Multi-agent collaboration engine</li>
+                    <li>✅ 24/7 VIP Engineering Support</li>
+                </ul>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("👑 Get Ultra Access", key="btn_ultra_plan", use_container_width=True, type="primary"):
+            st.balloons()
+            st.success("⚡ Welcome to Ultra! Answers fast like kudum-kudum 🚀")
 
 # --- MAIN INTERFACE TABS ---
 tab_chat, tab_rag, tab_logs, tab_deploy = st.tabs([
@@ -366,15 +571,47 @@ tab_chat, tab_rag, tab_logs, tab_deploy = st.tabs([
 # TAB 1: CHAT & DIALOGUE
 # ==============================================================================
 with tab_chat:
-    st.markdown('<div class="avalahalli-header">Avalahalli AI</div>', unsafe_allow_html=True)
-    st.markdown('<div class="avalahalli-sub">Fast, smart & versatile assistant for chat, code & research.</div>', unsafe_allow_html=True)
+    col_hdr, col_btn = st.columns([0.76, 0.24])
+    with col_hdr:
+        st.markdown('<div class="avalahalli-header">Avalahalli AI</div>', unsafe_allow_html=True)
+        st.markdown('<div class="avalahalli-sub">Fast, smart & versatile assistant for chat, code & research.</div>', unsafe_allow_html=True)
+    with col_btn:
+        st.markdown("<div style='height: 8px;'></div>", unsafe_allow_html=True)
+        if st.button("💎 **Upgrade / Plans**", use_container_width=True, type="primary", help="View Free, Pro, and Ultra subscription plans"):
+            show_subscription_modal()
+            
+    # Check if triggered from sidebar
+    if st.session_state.get("open_sub_modal"):
+        st.session_state.open_sub_modal = False
+        show_subscription_modal()
     
     # Container for all messages
     chat_container = st.container()
     
     with chat_container:
         if not st.session_state.messages:
-            st.info("👋 **Welcome to Avalahalli AI!** Click any question in the sidebar or type below to get started.")
+            st.markdown("### 💡 **Suggestions to get started**")
+            
+            # Main Page Suggestion Cards Grid (2 Columns)
+            col1, col2 = st.columns(2)
+            
+            suggestions = [
+                ("🍖 Best mutton shops in Avalahalli", "Star Mutton Stall, Shalimar & Mr. G Srinivasalu's pick"),
+                ("📺 Top 10 TV shows of all time", "Breaking Bad, The Wire, Band of Brothers & masterpieces"),
+                ("✈️ Plan me a 8 day vacation to Japan", "Tokyo, Kyoto, Hakone itinerary with photos & guide"),
+                ("🎓 Best colleges in Bangalore", "IISc, RVCE, BMSCE, PES & campus rankings"),
+                ("🏛️ Is CIT Bangalore a good college", "Placements, NAAC A+ score, courses & review"),
+                ("💻 Write debounce and throttle in typescript", "Clean, type-safe implementation with generics"),
+                ("🔬 How does CRISPR-Cas9 gene editing work", "Cas9 molecular scissors, gRNA & PAM breakdown"),
+                ("⚖️ Compare React vs Vue", "Reactivity, JSX vs SFC, Pinia & Virtual DOM")
+            ]
+            
+            for idx, (title, desc) in enumerate(suggestions):
+                clean_query = title.split(" ", 1)[1] if " " in title else title
+                target_col = col1 if idx % 2 == 0 else col2
+                with target_col:
+                    if st.button(f"**{title}**\n\n_{desc}_", key=f"main_sug_{idx}", use_container_width=True):
+                        handle_user_query(clean_query)
         else:
             for idx, msg in enumerate(st.session_state.messages):
                 role = msg["role"]
