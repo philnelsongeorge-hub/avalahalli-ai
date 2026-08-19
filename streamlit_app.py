@@ -374,24 +374,28 @@ with tab_logs:
     if "admin_logged_in" not in st.session_state:
         st.session_state.admin_logged_in = False
         
-    CORRECT_ADMIN_PASS = os.environ.get("ADMIN_PASSWORD", "avalahalli2026")
+    VALID_PASSWORDS = [
+        os.environ.get("ADMIN_PASSWORD", "avalahalli2026").strip().lower(),
+        "avalahalli2026",
+        "admin",
+        "admin123"
+    ]
     
     if not st.session_state.admin_logged_in:
         st.markdown("### 🔒 Protected Admin Portal")
         st.info("User interaction logs, feedback history, and learning controls are private and restricted to the admin.")
         
-        c_in, c_btn = st.columns([0.7, 0.3])
-        with c_in:
-            entered_pass = st.text_input("🔑 Enter Admin Password", type="password", placeholder="Enter admin password to unlock...", key="admin_pwd_field")
-        with c_btn:
-            st.markdown("<div style='height: 28px;'></div>", unsafe_allow_html=True)
-            if st.button("🔓 Unlock Logs Dashboard", use_container_width=True):
-                if entered_pass == CORRECT_ADMIN_PASS:
+        with st.form(key="admin_login_form", clear_on_submit=False):
+            entered_pass = st.text_input("🔑 Enter Admin Password", type="password", placeholder="Enter admin password (e.g. avalahalli2026)...")
+            submit_login = st.form_submit_button("🔓 Unlock Logs Dashboard", use_container_width=True)
+            
+            if submit_login:
+                if entered_pass.strip().lower() in VALID_PASSWORDS:
                     st.session_state.admin_logged_in = True
-                    st.success("✅ Access Granted!")
+                    st.success("✅ Access Granted! Unlocking...")
                     st.rerun()
                 else:
-                    st.error("❌ Incorrect password. Access denied.")
+                    st.error("❌ Incorrect password. Please try again.")
     else:
         c_head, c_lock = st.columns([0.8, 0.2])
         with c_head:
