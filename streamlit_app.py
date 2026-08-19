@@ -384,7 +384,9 @@ def handle_user_query(query_text):
     t_start = time.time()
     doc_ctx = st.session_state.uploaded_context if st.session_state.uploaded_context else ""
     
-    result = engine.process(query=query_clean, doc_content=doc_ctx)
+    # Pass previous conversation turns for multi-turn contextual memory
+    prev_history = st.session_state.messages[:-1] if len(st.session_state.messages) > 1 else []
+    result = engine.process(query=query_clean, doc_content=doc_ctx, history=prev_history)
     response_text = result.get("response", "No response generated.")
     elapsed = time.time() - t_start
     
