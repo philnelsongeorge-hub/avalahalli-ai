@@ -2,6 +2,7 @@
 ================================================================================
 ⚡ AVALAHALLI AI (STREAMLIT HUB)
 Clean, fast, and versatile AI assistant for chat, coding, and research.
+With Built-in Continuous Learning, Fixed Docked Chat Input & Real-Time Logging.
 ================================================================================
 """
 
@@ -12,6 +13,7 @@ import os
 import sys
 import re
 import base64
+from datetime import datetime
 
 # Add engine path
 ENGINE_DIR = os.path.join(os.path.dirname(__file__), 'server', 'src', 'engine')
@@ -23,6 +25,52 @@ try:
 except ImportError:
     st.error(f"Could not import AvalahalliEngine from {ENGINE_DIR}. Please check the directory path.")
     st.stop()
+
+# Setup Logs Directory
+LOGS_DIR = os.path.join(os.path.dirname(__file__), "logs")
+os.makedirs(LOGS_DIR, exist_ok=True)
+LOG_FILE_PATH = os.path.join(LOGS_DIR, "live_interactions.jsonl")
+
+def log_user_interaction(query, response, persona, elapsed_s, feedback=None, notes=""):
+    """Log user interactions for continuous evaluation and model training."""
+    record = {
+        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "query": query,
+        "persona": persona,
+        "elapsed_s": round(elapsed_s, 3),
+        "response": response[:1200] if response else "",
+        "feedback": feedback,
+        "notes": notes
+    }
+    try:
+        with open(LOG_FILE_PATH, "a", encoding="utf-8") as f:
+            f.write(json.dumps(record, ensure_ascii=False) + "\n")
+    except Exception:
+        pass
+
+def get_all_logged_interactions():
+    """Retrieve all interaction records."""
+    records = []
+    if os.path.exists(LOG_FILE_PATH):
+        with open(LOG_FILE_PATH, "r", encoding="utf-8", errors="ignore") as f:
+            for line in f:
+                line = line.strip()
+                if line:
+                    try:
+                        records.append(json.loads(line))
+                    except Exception:
+                        pass
+    legacy_log = os.path.join(os.path.dirname(__file__), "server", "logs", "live_interactions.jsonl")
+    if os.path.exists(legacy_log):
+        with open(legacy_log, "r", encoding="utf-8", errors="ignore") as f:
+            for line in f:
+                line = line.strip()
+                if line:
+                    try:
+                        records.append(json.loads(line))
+                    except Exception:
+                        pass
+    return records
 
 # --- PAGE CONFIGURATION ---
 st.set_page_config(
@@ -89,9 +137,11 @@ st.markdown(f"""
         }}
     }}
 
+    /* Ensure comfortable reading space above the docked text box */
     .main .block-container {{
         position: relative;
         z-index: 1;
+        padding-bottom: 120px !important;
     }}
     
     /* Header Styling */
@@ -205,9 +255,10 @@ with st.sidebar:
         st.rerun()
 
 # --- MAIN INTERFACE TABS ---
-tab_chat, tab_rag, tab_deploy = st.tabs([
+tab_chat, tab_rag, tab_logs, tab_deploy = st.tabs([
     "💬 Chat", 
     "📚 Document QA", 
+    "📊 Logs & Continuous Learning",
     "🚀 Deployment Guide"
 ])
 
@@ -218,79 +269,80 @@ with tab_chat:
     st.markdown('<div class="avalahalli-header">Avalahalli AI</div>', unsafe_allow_html=True)
     st.markdown('<div class="avalahalli-sub">Fast, smart & versatile assistant for chat, code & research.</div>', unsafe_allow_html=True)
     
-    # Display message history
-    if not st.session_state.messages:
-        st.info("👋 **Welcome to Avalahalli AI!** Type a question below or choose a suggestion from the sidebar to get started.")
-    else:
-        for msg in st.session_state.messages:
-            role = msg["role"]
-            content = msg["content"]
-            persona_name = msg.get("persona", "General Assistant")
-            badge_class = PERSONAS.get(persona_name, {}).get("badge", "badge-general")
-            
-            if role == "user":
-                with st.chat_message("user", avatar="🧑‍💻"):
-                    st.markdown(content)
-            else:
-                with st.chat_message("assistant", avatar="⚡"):
-                    st.markdown(f'<span class="persona-badge {badge_class}">{persona_name}</span>', unsafe_allow_html=True)
-                    st.markdown(content)
-                    
-    # Chat Input Box
+    # Container for all messages
+    chat_container = st.container()
+    
+    with chat_container:
+        if not st.session_state.messages:
+            st.info("👋 **Welcome to Avalahalli AI!** Type a question in the box below or choose a suggestion from the sidebar to get started.")
+        else:
+            for idx, msg in enumerate(st.session_state.messages):
+                role = msg["role"]
+                content = msg["content"]
+                persona_name = msg.get("persona", "General Assistant")
+                badge_class = PERSONAS.get(persona_name, {}).get("badge", "badge-general")
+                
+                if role == "user":
+                    with st.chat_message("user", avatar="🧑‍💻"):
+                        st.markdown(content)
+                else:
+                    with st.chat_message("assistant", avatar="⚡"):
+                        st.markdown(f'<span class="persona-badge {badge_class}">{persona_name}</span>', unsafe_allow_html=True)
+                        st.markdown(content)
+                        st.caption(f"⚡ Response generated in {msg.get('elapsed', 0.05):.2f}s")
+                        
+                        # User Feedback Row (Continuous Active Learning)
+                        c_fb1, c_fb2, c_fb3 = st.columns([0.08, 0.08, 0.84])
+                        with c_fb1:
+                            if st.button("👍", key=f"thumb_up_{idx}", help="Helpful"):
+                                log_user_interaction(msg.get("query_text", ""), content, persona_name, msg.get("elapsed", 0), feedback="positive")
+                                st.toast("Thank you for your feedback! 👍")
+                        with c_fb2:
+                            if st.button("👎", key=f"thumb_down_{idx}", help="Needs improvement"):
+                                log_user_interaction(msg.get("query_text", ""), content, persona_name, msg.get("elapsed", 0), feedback="negative")
+                                st.toast("Feedback logged! Model will learn from this. 🛠️")
+                                
+    # Chat Input (Always docked at bottom, never disappears)
     default_prompt = st.session_state.pop("prefill_prompt", "")
     user_input = st.chat_input("Ask Avalahalli AI anything...") or default_prompt
     
     if user_input:
-        # Add user message to history
+        # 1. Immediately append user message
         st.session_state.messages.append({
             "role": "user",
             "content": user_input,
             "timestamp": time.time()
         })
         
-        # Display user message immediately
-        with st.chat_message("user", avatar="🧑‍💻"):
-            st.markdown(user_input)
-            
-        # Process with Avalahalli Engine
-        with st.chat_message("assistant", avatar="⚡"):
-            badge_class = PERSONAS[st.session_state.persona]["badge"]
-            st.markdown(f'<span class="persona-badge {badge_class}">{st.session_state.persona}</span>', unsafe_allow_html=True)
-            
-            with st.spinner("Generating response..."):
-                t_start = time.time()
-                
-                # Context injection if document uploaded
-                doc_ctx = st.session_state.uploaded_context if st.session_state.uploaded_context else ""
-                
-                # Format query with currency if requested
-                effective_query = user_input
-                if "Rupees" in preferred_currency and not any(w in user_input.lower() for w in ["rupee", "rupees", "inr", "₹"]):
-                    if any(w in user_input.lower() for w in ["travel", "trip", "vacation", "pricing", "budget", "cost", "hotel"]):
-                        effective_query += " in rupees"
-                
-                # Execute engine
-                result = engine.process(
-                    query=effective_query,
-                    doc_content=doc_ctx
-                )
-                
-                response_text = result.get("response", "No response generated.")
-                elapsed = time.time() - t_start
-                
-                # Render response
-                st.markdown(response_text)
-                st.caption(f"⚡ Response generated in {elapsed:.2f}s")
-                
-                # Record to history
-                st.session_state.messages.append({
-                    "role": "assistant",
-                    "content": response_text,
-                    "persona": st.session_state.persona,
-                    "elapsed": elapsed,
-                    "timestamp": time.time()
-                })
-                st.session_state.query_count += 1
+        # 2. Synthesize with Avalahalli Engine
+        t_start = time.time()
+        doc_ctx = st.session_state.uploaded_context if st.session_state.uploaded_context else ""
+        
+        effective_query = user_input
+        if "Rupees" in preferred_currency and not any(w in user_input.lower() for w in ["rupee", "rupees", "inr", "₹"]):
+            if any(w in user_input.lower() for w in ["travel", "trip", "vacation", "pricing", "budget", "cost", "hotel"]):
+                effective_query += " in rupees"
+        
+        result = engine.process(query=effective_query, doc_content=doc_ctx)
+        response_text = result.get("response", "No response generated.")
+        elapsed = time.time() - t_start
+        
+        # 3. Log interaction
+        log_user_interaction(user_input, response_text, st.session_state.persona, elapsed)
+        
+        # 4. Append assistant response
+        st.session_state.messages.append({
+            "role": "assistant",
+            "content": response_text,
+            "query_text": user_input,
+            "persona": st.session_state.persona,
+            "elapsed": elapsed,
+            "timestamp": time.time()
+        })
+        st.session_state.query_count += 1
+        
+        # 5. Clean rerun to render perfectly in the chat stream above the input box
+        st.rerun()
 
 # ==============================================================================
 # TAB 2: DOCUMENT RAG & KNOWLEDGE BASE
@@ -316,7 +368,69 @@ with tab_rag:
         st.info("Upload any document above to chat with its contents.")
 
 # ==============================================================================
-# TAB 3: HOSTING & DEPLOYMENT GUIDE
+# TAB 3: USER LOGS & CONTINUOUS LEARNING
+# ==============================================================================
+with tab_logs:
+    st.markdown("### 📊 Interaction Logs & Continuous Learning Dashboard")
+    st.markdown("Avalahalli AI automatically records queries, latency, and user feedback (👍 / 👎) to identify mistakes and train continuously.")
+    
+    all_logs = get_all_logged_interactions()
+    
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        st.metric("Total User Interactions Logged", len(all_logs))
+    with c2:
+        positive_fb = sum(1 for l in all_logs if l.get("feedback") == "positive")
+        total_fb = sum(1 for l in all_logs if l.get("feedback") in ["positive", "negative"])
+        fb_rate = f"{(positive_fb / total_fb * 100):.1f}%" if total_fb > 0 else "100.0%"
+        st.metric("Positive Feedback Rate (👍)", fb_rate)
+    with c3:
+        st.metric("Engine Health", "Online & Logging 🟢")
+        
+    st.divider()
+    
+    col_btn1, col_btn2 = st.columns(2)
+    with col_btn1:
+        # Download Logs Button
+        log_json_data = json.dumps(all_logs, indent=2, ensure_ascii=False)
+        st.download_button(
+            label="📥 Download All Logs (JSON)",
+            data=log_json_data,
+            file_name=f"avalahalli_ai_logs_{datetime.now().strftime('%Y%m%d')}.json",
+            mime="application/json",
+            use_container_width=True
+        )
+    with col_btn2:
+        if st.button("🧠 Run Automated Log Audit & Mistake Training", use_container_width=True):
+            with st.spinner("Analyzing all interaction logs for edge cases and errors..."):
+                try:
+                    from auto_train_from_logs import analyze_and_train_from_logs
+                    res = analyze_and_train_from_logs()
+                    st.success(f"🎉 Audited {res.get('total', 0)} queries! Perfect Synthesis Rate: {res.get('accuracy', 100):.2f}% with {res.get('mistakes_count', 0)} mistakes.")
+                except Exception as e:
+                    st.error(f"Error running training script: {e}")
+                    
+    st.divider()
+    
+    st.markdown("#### 📋 Latest 20 User Inquiries & Responses")
+    if all_logs:
+        import pandas as pd
+        table_rows = []
+        for l in reversed(all_logs[-20:]):
+            table_rows.append({
+                "Timestamp": l.get("timestamp", "")[:19].replace("T", " "),
+                "User Query": l.get("query", ""),
+                "Persona": l.get("persona", "General"),
+                "Feedback": "👍" if l.get("feedback") == "positive" else ("👎" if l.get("feedback") == "negative" else "—"),
+                "Speed": f"{l.get('elapsed_s', l.get('executionTimeMs', 0) / 1000):.2f}s"
+            })
+        df_logs = pd.DataFrame(table_rows)
+        st.dataframe(df_logs, use_container_width=True)
+    else:
+        st.info("No queries logged yet. Start chatting in Tab 1 to generate live logs!")
+
+# ==============================================================================
+# TAB 4: HOSTING & DEPLOYMENT GUIDE
 # ==============================================================================
 with tab_deploy:
     st.markdown("### 🚀 How to Host & Deploy Avalahalli AI")
@@ -329,7 +443,7 @@ with tab_deploy:
     #### 🌟 Option 1: Streamlit Community Cloud (Recommended — Free & Permanent)
     1. **Upload your code to GitHub**:
        - Go to [github.com/new](https://github.com/new) and create a public repository called `avalahalli-ai`.
-       - Upload `streamlit_app.py`, `requirements.txt`, `.streamlit/`, and `server/src/engine/`.
+       - Upload `streamlit_app.py`, `shalimar_b64.py`, `requirements.txt`, `.streamlit/`, and `server/src/engine/`.
     2. Go to **[share.streamlit.io](https://share.streamlit.io/)** and sign in with GitHub.
     3. Click **"New App"** and select:
        - **Repository**: `YOUR_USERNAME/avalahalli-ai`
