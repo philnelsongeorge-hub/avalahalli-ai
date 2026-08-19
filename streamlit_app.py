@@ -141,7 +141,70 @@ st.markdown(f"""
     .main .block-container {{
         position: relative;
         z-index: 1;
-        padding-bottom: 120px !important;
+        padding-bottom: 160px !important;
+    }}
+
+    /* Clean Docked Bottom Input (Zero Ghost Shadows) */
+    div[data-testid="stBottom"] {{
+        background: transparent !important;
+        padding: 10px 24px 20px 24px !important;
+    }}
+    
+    div[data-testid="stChatInput"] {{
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        max-width: 820px !important;
+        margin: 0 auto !important;
+    }}
+
+    div[data-testid="stChatInput"] > div {{
+        border-radius: 24px !important;
+        background: rgba(22, 30, 46, 0.85) !important;
+        border: 1px solid rgba(148, 163, 184, 0.2) !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+    }}
+
+    div[data-testid="stChatInput"] > div:focus-within {{
+        border-color: rgba(56, 189, 248, 0.5) !important;
+        box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.3), 0 6px 24px rgba(0, 0, 0, 0.4) !important;
+    }}
+
+    div[data-testid="stChatInput"] textarea {{
+        background: transparent !important;
+        color: #f8fafc !important;
+        font-size: 0.95rem !important;
+    }}
+
+    /* Replace sidebar collapse/expand double-arrows with 3-Lines Hamburger Menu (☰) */
+    button[data-testid="stSidebarCollapseButton"] svg,
+    button[data-testid="baseButton-header"] svg,
+    div[data-testid="collapsedControl"] svg,
+    button[kind="header"] svg {{
+        display: none !important;
+    }}
+
+    button[data-testid="stSidebarCollapseButton"]::after,
+    button[data-testid="baseButton-header"]::after,
+    div[data-testid="collapsedControl"]::after,
+    button[kind="header"]::after {{
+        content: "☰" !important;
+        font-size: 1.35rem !important;
+        color: #94a3b8 !important;
+        display: inline-block !important;
+        line-height: 1 !important;
+        font-weight: bold !important;
+        transition: all 0.2s ease !important;
+    }}
+
+    button[data-testid="stSidebarCollapseButton"]:hover::after,
+    button[data-testid="baseButton-header"]:hover::after,
+    div[data-testid="collapsedControl"]:hover::after,
+    button[kind="header"]:hover::after {{
+        color: #38bdf8 !important;
+        transform: scale(1.15) !important;
     }}
     
     /* Header Styling */
