@@ -1,7 +1,7 @@
 """
 ================================================================================
-🏛️ AVALAHALLI AI — GEMINI-GRADE INTELLIGENT CHATBOT (STREAMLIT HUB)
-Autonomous Multi-Persona Engine with Deep Research, Code Synthesis & Image Generation
+⚡ AVALAHALLI AI (STREAMLIT HUB)
+Clean, fast, and versatile AI assistant for chat, coding, and research.
 ================================================================================
 """
 
@@ -25,7 +25,7 @@ except ImportError:
 
 # --- PAGE CONFIGURATION ---
 st.set_page_config(
-    page_title="Avalahalli AI — Gemini-Standard Intelligence",
+    page_title="Avalahalli AI",
     page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -36,42 +36,24 @@ st.markdown("""
 <style>
     /* Dark Theme Adjustments */
     .stApp {
-        background: linear-gradient(135deg, #090d16 0%, #111827 50%, #090d16 100%);
+        background: linear-gradient(135deg, #0b0f19 0%, #111827 50%, #0b0f19 100%);
         color: #f8fafc;
     }
     
     /* Header Styling */
     .avalahalli-header {
-        background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%);
+        background: linear-gradient(90deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         font-weight: 800;
-        font-size: 2.4rem;
-        margin-bottom: 0.2rem;
+        font-size: 2.2rem;
+        margin-bottom: 0.1rem;
     }
     
     .avalahalli-sub {
         color: #94a3b8;
         font-size: 0.95rem;
-        margin-bottom: 1.5rem;
-    }
-    
-    /* Chat Message Bubbles */
-    .chat-bubble-user {
-        background: rgba(59, 130, 246, 0.15);
-        border: 1px solid rgba(59, 130, 246, 0.3);
-        border-radius: 12px;
-        padding: 12px 16px;
-        margin-bottom: 12px;
-    }
-    
-    .chat-bubble-assistant {
-        background: rgba(30, 41, 59, 0.7);
-        border: 1px solid rgba(148, 163, 184, 0.15);
-        border-radius: 12px;
-        padding: 14px 18px;
-        margin-bottom: 16px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        margin-bottom: 1.2rem;
     }
     
     /* Badge styling */
@@ -91,24 +73,16 @@ st.markdown("""
     .badge-travel { background: #f59e0b; color: white; }
     .badge-creative { background: #ec4899; color: white; }
     .badge-academic { background: #06b6d4; color: white; }
-    
-    /* Stats Box */
-    .stat-card {
-        background: rgba(30, 41, 59, 0.6);
-        border: 1px solid rgba(148, 163, 184, 0.2);
-        border-radius: 8px;
-        padding: 10px;
-        text-align: center;
-    }
 </style>
 """, unsafe_allow_html=True)
 
-# --- INITIALIZE ENGINE (CACHED) ---
-@st.cache_resource
-def load_engine():
-    return AvalahalliEngine()
+# --- INITIALIZE ENGINE (LIVE DYNAMIC RELOAD) ---
+import avalahalli_engine
+import importlib
+importlib.reload(avalahalli_engine)
+from avalahalli_engine import AvalahalliEngine
 
-engine = load_engine()
+engine = AvalahalliEngine()
 
 # --- INITIALIZE SESSION STATE ---
 if "messages" not in st.session_state:
@@ -117,33 +91,30 @@ if "uploaded_context" not in st.session_state:
     st.session_state.uploaded_context = ""
 if "persona" not in st.session_state:
     st.session_state.persona = "General Assistant"
-if "total_tokens" not in st.session_state:
-    st.session_state.total_tokens = 0
 if "query_count" not in st.session_state:
     st.session_state.query_count = 0
 
-# --- PERSONA DICTIONARY ---
+# --- PERSONAS ---
 PERSONAS = {
-    "General Assistant": {"icon": "⚡", "badge": "badge-general", "desc": "Balanced multi-domain Avalahalli assistant for all everyday inquiries."},
-    "Senior Polyglot Engineer": {"icon": "💻", "badge": "badge-coder", "desc": "Specialized in clean algorithms, design patterns, and debugging across Python, TypeScript, Rust & SQL."},
-    "Deep Researcher": {"icon": "🔬", "badge": "badge-research", "desc": "Rigorous academic synthesis, literature reviews, scientific concepts, and data citations."},
-    "Travel & Budget Concierge": {"icon": "✈️", "badge": "badge-travel", "desc": "Geo-clustered multi-day itineraries, landmark photos, and INR ₹ / USD $ cost breakdowns."},
-    "Creative Visual Artist": {"icon": "🎨", "badge": "badge-creative", "desc": "High-fidelity prompt engineering and FLUX.1 visual synthesis."},
-    "Academic & College Advisor": {"icon": "🎓", "badge": "badge-academic", "desc": "Institutional scorecards, Bangalore NIRF rankings, admissions, placements, and reviews."}
+    "General Assistant": {"icon": "⚡", "badge": "badge-general", "desc": "Helpful assistant for everyday questions and tasks."},
+    "Software Engineer": {"icon": "💻", "badge": "badge-coder", "desc": "Clean code, algorithms, and debugging across languages."},
+    "Researcher": {"icon": "🔬", "badge": "badge-research", "desc": "In-depth explanations, concepts, and structured analysis."},
+    "Travel Guide": {"icon": "✈️", "badge": "badge-travel", "desc": "Day-by-day itineraries, attractions, and budget estimates."},
+    "Creative Artist": {"icon": "🎨", "badge": "badge-creative", "desc": "Creative writing, ideas, and visual image descriptions."},
+    "College Advisor": {"icon": "🎓", "badge": "badge-academic", "desc": "College rankings, courses, placements, and campus guides."}
 }
 
 # --- SIDEBAR CONTROLS ---
 with st.sidebar:
-    st.markdown("## ⚡ **Avalahalli AI Hub**")
-    st.markdown("*Autonomous Neural Core v2.0*")
+    st.markdown("## ⚡ **Avalahalli AI**")
+    st.markdown("*Clean & Fast Assistant*")
     st.divider()
     
     # Persona Selector
     selected_persona = st.selectbox(
-        "🧠 **Select Active Persona**",
+        "🧠 **Persona**",
         options=list(PERSONAS.keys()),
         index=list(PERSONAS.keys()).index(st.session_state.persona),
-        help="Switching personas optimizes tone, depth, and output formatting."
     )
     st.session_state.persona = selected_persona
     persona_info = PERSONAS[selected_persona]
@@ -151,24 +122,17 @@ with st.sidebar:
     
     st.divider()
     
-    # Engine Settings
-    st.markdown("### ⚙️ **Engine Settings**")
-    web_search = st.toggle("🌐 Enable Web Search Grounding", value=True, help="Fetch real-time Wikipedia and authoritative web citations.")
-    preferred_currency = st.selectbox("💱 Budget Currency", ["₹ Indian Rupees (INR)", "$ US Dollars (USD)", "€ Euros (EUR)"])
-    enable_images = st.toggle("🖼️ Visual Photos & AI Generation", value=True)
-    
-    st.divider()
-    
     # Quick Starters
-    st.markdown("### 💡 **Quick Starters**")
+    st.markdown("### 💡 **Quick Questions**")
     quick_prompts = [
+        "🍖 Best mutton shops in Avalahalli",
         "📺 Top 10 TV shows of all time",
-        "✈️ Plan me a 8 day vacation to Japan in rupees",
-        "🎓 Best colleges in Bangalore for engineering",
+        "✈️ Plan me a 8 day vacation to Japan",
+        "🎓 Best colleges in Bangalore",
         "🏛️ Is CIT Bangalore a good college",
         "💻 Write debounce and throttle in typescript",
         "🔬 How does CRISPR-Cas9 gene editing work",
-        "⚖️ Compare React vs Vue architecture"
+        "⚖️ Compare React vs Vue"
     ]
     
     for qp in quick_prompts:
@@ -178,37 +142,31 @@ with st.sidebar:
             
     st.divider()
     
-    # Benchmark Accreditation
-    st.markdown("### 🏆 **Model Accreditation**")
-    col1, col2 = st.columns(2)
-    with col1:
-        st.metric("Test Suites", "2,500 / 2,500", "100.0%")
-    with col2:
-        st.metric("Standard", "Gemini 2.0", "Accredited")
-        
-    if st.button("🗑️ Clear Chat History", use_container_width=True):
+    # Budget Currency Setting
+    preferred_currency = st.selectbox("💱 Travel Currency", ["₹ Rupees (INR)", "$ Dollars (USD)", "€ Euros (EUR)"])
+    
+    if st.button("🗑️ Clear Chat", use_container_width=True):
         st.session_state.messages = []
         st.session_state.query_count = 0
         st.rerun()
 
 # --- MAIN INTERFACE TABS ---
-tab_chat, tab_rag, tab_benchmark, tab_deploy = st.tabs([
-    "💬 Dialogue & Chat", 
-    "📚 Document RAG", 
-    "📊 Benchmarks & Health", 
-    "🚀 Hosting & Deployment"
+tab_chat, tab_rag, tab_deploy = st.tabs([
+    "💬 Chat", 
+    "📚 Document QA", 
+    "🚀 Deployment Guide"
 ])
 
 # ==============================================================================
 # TAB 1: CHAT & DIALOGUE
 # ==============================================================================
 with tab_chat:
-    st.markdown('<div class="avalahalli-header">Avalahalli AI — Gemini Standard</div>', unsafe_allow_html=True)
-    st.markdown('<div class="avalahalli-sub">Autonomous Neural Engine with Code Verification, Deep Research & Visual Synthesis</div>', unsafe_allow_html=True)
+    st.markdown('<div class="avalahalli-header">Avalahalli AI</div>', unsafe_allow_html=True)
+    st.markdown('<div class="avalahalli-sub">Fast, smart & versatile assistant for chat, code & research.</div>', unsafe_allow_html=True)
     
     # Display message history
     if not st.session_state.messages:
-        st.info("👋 **Welcome to Avalahalli AI!** Ask a question, request a travel itinerary, write code, or explore top recommendations. Choose a quick starter from the sidebar to begin.")
+        st.info("👋 **Welcome to Avalahalli AI!** Type a question below or choose a suggestion from the sidebar to get started.")
     else:
         for msg in st.session_state.messages:
             role = msg["role"]
@@ -226,7 +184,7 @@ with tab_chat:
                     
     # Chat Input Box
     default_prompt = st.session_state.pop("prefill_prompt", "")
-    user_input = st.chat_input("Ask Avalahalli AI anything (code, research, travel, colleges, recommendations)...") or default_prompt
+    user_input = st.chat_input("Ask Avalahalli AI anything...") or default_prompt
     
     if user_input:
         # Add user message to history
@@ -245,13 +203,13 @@ with tab_chat:
             badge_class = PERSONAS[st.session_state.persona]["badge"]
             st.markdown(f'<span class="persona-badge {badge_class}">{st.session_state.persona}</span>', unsafe_allow_html=True)
             
-            with st.spinner("Avalahalli AI synthesizing Gemini-grade response..."):
+            with st.spinner("Generating response..."):
                 t_start = time.time()
                 
-                # Context injection if RAG document is present
+                # Context injection if document uploaded
                 doc_ctx = st.session_state.uploaded_context if st.session_state.uploaded_context else ""
                 
-                # Format query with currency modifier if needed
+                # Format query with currency if requested
                 effective_query = user_input
                 if "Rupees" in preferred_currency and not any(w in user_input.lower() for w in ["rupee", "rupees", "inr", "₹"]):
                     if any(w in user_input.lower() for w in ["travel", "trip", "vacation", "pricing", "budget", "cost", "hotel"]):
@@ -263,12 +221,12 @@ with tab_chat:
                     doc_content=doc_ctx
                 )
                 
-                response_text = result.get("response", "No response synthesized.")
+                response_text = result.get("response", "No response generated.")
                 elapsed = time.time() - t_start
                 
                 # Render response
                 st.markdown(response_text)
-                st.caption(f"⚡ Synthesized in {elapsed:.2f}s | Engine: Avalahalli Neural Core v2.0")
+                st.caption(f"⚡ Response generated in {elapsed:.2f}s")
                 
                 # Record to history
                 st.session_state.messages.append({
@@ -284,126 +242,52 @@ with tab_chat:
 # TAB 2: DOCUMENT RAG & KNOWLEDGE BASE
 # ==============================================================================
 with tab_rag:
-    st.markdown("### 📚 Document QA & Knowledge Grounding (RAG)")
-    st.markdown("Upload documents (.txt, .md, .py, .csv, .json) to ground Avalahalli AI responses in custom reference data.")
+    st.markdown("### 📚 Document QA")
+    st.markdown("Upload a text file (.txt, .md, .py, .csv, .json) to ask questions about your specific documents.")
     
-    uploaded_file = st.file_uploader("Choose a document to ingest", type=["txt", "md", "py", "json", "csv"])
+    uploaded_file = st.file_uploader("Choose a document", type=["txt", "md", "py", "json", "csv"])
     if uploaded_file is not None:
         raw_text = uploaded_file.read().decode("utf-8", errors="ignore")
         st.session_state.uploaded_context = raw_text
-        st.success(f"✅ Ingested **{uploaded_file.name}** ({len(raw_text):,} characters / ~{len(raw_text.split()):,} words)")
+        st.success(f"✅ Ingested **{uploaded_file.name}** ({len(raw_text):,} characters)")
         
-        with st.expander("🔍 View Ingested Document Preview", expanded=False):
+        with st.expander("🔍 View Ingested Document", expanded=False):
             st.code(raw_text[:2000] + ("\n... [truncated]" if len(raw_text) > 2000 else ""), language="markdown")
             
-        if st.button("🗑️ Clear Ingested Context"):
+        if st.button("🗑️ Clear Document"):
             st.session_state.uploaded_context = ""
-            st.info("Knowledge base cleared.")
+            st.info("Document cleared.")
             st.rerun()
     else:
-        st.info("Upload any knowledge document to enable contextual grounding.")
+        st.info("Upload any document above to chat with its contents.")
 
 # ==============================================================================
-# TAB 3: BENCHMARKS & MODEL HEALTH
-# ==============================================================================
-with tab_benchmark:
-    st.markdown("### 📊 Avalahalli AI Performance & Accreditation Dashboard")
-    
-    c1, c2, c3, c4 = st.columns(4)
-    with c1:
-        st.metric("Total Datasets", "2,500", "+1,500 Expanded")
-    with c2:
-        st.metric("Accuracy Pass Rate", "100.0%", "0 Failures")
-    with c3:
-        st.metric("Avg Latency", "2.3ms", "Zero-lag CPU")
-    with c4:
-        st.metric("Model Fidelity", "Gemini 2.0", "Accredited")
-        
-    st.divider()
-    
-    st.markdown("#### 🧪 Run Instant Avalahalli AI Verification")
-    if st.button("🚀 Run Live 8-Suite Verification Harness"):
-        with st.spinner("Executing live verification across all flagship capability domains..."):
-            test_queries = [
-                ("📺 Top 10 TV Shows", "top 10 tv shows of all time", "Breaking Bad"),
-                ("⛩️ Top Anime Series", "best anime series of all time", "Fullmetal Alchemist"),
-                ("🎓 Bangalore Colleges", "best cllges in bangalore", "RVCE"),
-                ("🏛️ CIT Institutional Review", "is CIT Bangalore a good college", "NAAC 'A+' Grade"),
-                ("✈️ Multi-Day Travel", "plan me a 8 day vacation to japan", "Shinkansen"),
-                ("💻 Code Synthesis", "write debounce and throttle in typescript", "debounce"),
-                ("🔬 Scientific Depth", "how does CRISPR-Cas9 gene editing work", "Cas9"),
-                ("⚖️ Architectural Comparison", "compare react vs vue architecture", "Virtual DOM")
-            ]
-            
-            results_data = []
-            for name, q, match in test_queries:
-                t0 = time.time()
-                res = engine.process(query=q)
-                resp = res.get('response', '')
-                t1 = time.time()
-                passed = match.lower() in resp.lower()
-                results_data.append({
-                    "Suite Name": name,
-                    "Target Keyword": match,
-                    "Latency (ms)": round((t1 - t0) * 1000, 2),
-                    "Status": "✅ PASS" if passed else "❌ FAIL"
-                })
-            
-            import pandas as pd
-            df = pd.DataFrame(results_data)
-            st.dataframe(df, use_container_width=True)
-            st.success("🎉 All 8 Live Avalahalli Flagship Suites PASSED at 100%!")
-
-# ==============================================================================
-# TAB 4: HOSTING & DEPLOYMENT GUIDE
+# TAB 3: HOSTING & DEPLOYMENT GUIDE
 # ==============================================================================
 with tab_deploy:
     st.markdown("### 🚀 How to Host & Deploy Avalahalli AI")
     
     st.markdown("""
-    You can easily host this Avalahalli AI application for free or on your own server. Choose your preferred method below:
+    You can easily host Avalahalli AI online for free:
     
     ---
     
-    #### 🌟 Option 1: Streamlit Community Cloud (100% Free — Recommended)
-    1. **Push your code to GitHub**:
-       ```bash
-       git init
-       git add .
-       git commit -m "Deploy Avalahalli AI Streamlit App"
-       git remote add origin https://github.com/YOUR_USERNAME/avalahalli-ai.git
-       git push -u origin main
-       ```
+    #### 🌟 Option 1: Streamlit Community Cloud (Recommended — Free & Permanent)
+    1. **Upload your code to GitHub**:
+       - Go to [github.com/new](https://github.com/new) and create a public repository called `avalahalli-ai`.
+       - Upload `streamlit_app.py`, `requirements.txt`, `.streamlit/`, and `server/src/engine/`.
     2. Go to **[share.streamlit.io](https://share.streamlit.io/)** and sign in with GitHub.
     3. Click **"New App"** and select:
        - **Repository**: `YOUR_USERNAME/avalahalli-ai`
-       - **Branch**: `main`
        - **Main file path**: `streamlit_app.py`
-    4. Click **Deploy!** Your app will be live with a permanent public URL like `https://avalahalli-ai.streamlit.app`.
+    4. Click **Deploy!** Your app will be live at `https://avalahalli-ai.streamlit.app`.
     
     ---
     
-    #### 🐳 Option 2: Run Locally (Instant 1-Command Run)
-    Run this command in your terminal from the project folder:
+    #### 🐳 Option 2: Run Locally
+    Run this in your terminal:
     ```bash
     python -m streamlit run streamlit_app.py
     ```
-    Your browser will automatically open at `http://localhost:8501`.
-    
-    ---
-    
-    #### 🌐 Option 3: Hugging Face Spaces (Free Cloud Hosting)
-    1. Create a new Space on [Hugging Face Spaces](https://huggingface.co/spaces).
-    2. Choose **Streamlit** as the SDK.
-    3. Upload `streamlit_app.py`, `requirements.txt`, and the `server/src/engine` folder.
-    4. Your app builds and runs instantly in the cloud!
-    
-    ---
-    
-    #### ☁️ Option 4: Render / Railway / Docker
-    Build and run with:
-    ```bash
-    docker build -t avalahalli-ai .
-    docker run -p 8501:8501 avalahalli-ai
-    ```
+    Your browser will open at `http://localhost:8501`.
     """)

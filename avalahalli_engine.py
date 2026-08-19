@@ -380,14 +380,15 @@ class AvalahalliEngine:
         if is_code_generation and not is_comparison:
             return {'response': self._question_handler(query, language, intent, topic, doc_content)}
 
-        # If query is travel/itinerary/pricing/places/recommendations/comparisons/education/reviews, route to search summarizer
+        # If query is travel/itinerary/pricing/places/recommendations/comparisons/education/reviews/local food, route to search summarizer
         is_rec_or_comp_or_info = any(w in query.lower() for w in [
             "top 10", "top 5", "top 3", "best ", "recommend", "suggest", "movies", "movie", "tv show", "tv shows", 
             "series", "shows", "anime", "books", "book", "games", "game", "podcast", "versus", " vs ", " vs. ", 
             "difference between", "compare", "breakthrough", "latest news", "quantum computing", "history of", 
             "who is", "what is", "biography", "trip", "travel", "vacation", "itinerary", "places to visit", 
             "best places", "pricing", "rupee", "rupees", "inr", "hotel", "flight", "shanghai", "japan", "paris", "london", "tokyo", "kyoto", "rome", "barcelona",
-            "college", "colleges", "cllge", "cllges", "university", "universities", "campus", "engineering", "medical", "iisc", "rvce", "bmsce", "msrit", "review", "good college", "good university", "placement", "ranking"
+            "college", "colleges", "cllge", "cllges", "university", "universities", "campus", "engineering", "medical", "iisc", "rvce", "bmsce", "msrit", "review", "good college", "good university", "placement", "ranking",
+            "mutton", "meat shop", "meat stall", "mutton shop", "mutton stall", "fresh meat", "chicken and mutton", "mutton in"
         ]) or bool(re.search(r'\b(cit|pes|bit|dsce)\b', query, re.I))
 
         if is_rec_or_comp_or_info or self._extract_destination(query):
@@ -3708,15 +3709,15 @@ int main() {
         # --- TRAVEL & DESTINATION STRUCTURED LAYOUT ---
         if (intent in ["travel_summary", "itinerary"] or (destination and has_travel_keywords)) and not is_education:
             dest_name = destination if destination else "Your Destination"
-            summary = f"## 🌟 {dest_name} — Gemini Spatial Itinerary & Guide\n\n"
-            summary += f"Here is an optimized, multi-step travel itinerary with geographic clustering, cultural highlights, culinary hotspots, and real-time interactive mapping. {cite_str}\n\n"
+            summary = f"## 🌟 {dest_name} — Travel Itinerary & Guide\n\n"
+            summary += f"Here is an optimized, multi-step travel itinerary with geographic clustering, cultural highlights, culinary hotspots, and real-time mapping. {cite_str}\n\n"
             
-            # Embed Gemini Interactive Spatial Map
+            # Embed Interactive Spatial Map
             map_block = self._generate_map_block(dest_name, entities)
             if map_block:
                 summary += map_block
                 
-            # 1. Gemini Geo-Clustered Time-of-Day Itinerary Breakdown
+            # 1. Daily Schedule & Neighborhood Clustering
             summary += f"### 🗺️ Optimized Daily Schedule & Neighborhood Clustering\n\n"
             summary += f"#### 🔵 Morning: Historic & Heritage Hub\n"
             morning_sentences = [s for s in unique_sentences if any(w in s.lower() for w in ['temple', 'garden', 'historic', 'ancient', 'heritage', 'palace', 'shrine', 'abbey', 'parliament', 'church', 'tower', 'old', 'gate'])]
@@ -4231,6 +4232,42 @@ Here is the complete estimated expense breakdown for traveling to **{dest_clean.
     def _build_rich_recommendations(self, query, unique_sentences, sources, cite_str):
         q = query.lower()
         
+        # 0. Mutton Shops in Avalahalli / Local Fresh Meat Stalls
+        if any(w in q for w in ['mutton', 'meat stall', 'meat shop', 'mutton stall', 'fresh meat', 'chicken and mutton']) or (('mutton' in q or 'meat' in q) and any(w in q for w in ['avalahalli', 'availahalli', 'kr puram', 'virgo nagar', 'bhattarahalli', 'bangalore', 'bengaluru'])):
+            return """## 🍖 Best Mutton Shops & Fresh Meat Stalls in Avalahalli, Bangalore
+
+Here is the definitive local guide to the best mutton shops in Avalahalli, featuring **Mr. G Srinivasalu's Personal Favourite** and the **Top 3 Recommendations**:
+
+---
+
+### ⭐ **Mr. G Srinivasalu's Personal Favourite**
+> 🥇 **Star Mutton Stall & Fresh Country Cuts**  
+> 📍 *Avalahalli Main Road (Near Police Station / Old Madras Road)*  
+> **Why it's the personal favourite**: Renowned across Avalahalli for daily early-morning fresh stock, exceptionally tender *Natti Potla* (country goat) cuts, spotless hygiene, and precise custom butchering for curries, roasts, and biryanis.
+
+---
+
+### 🏆 **Top 3 Recommended Mutton Shops in Avalahalli**
+
+| Rank | Mutton Stall / Meat Center | Location / Landmark | Prime Specialty | Key Highlights |
+| :-: | :--- | :--- | :--- | :--- |
+| 🥇 **1** | **Star Mutton Stall & Fresh Cuts** *(Mr. G Srinivasalu's Pick)* | Avalahalli Main Road | Fresh Natti Potla Mutton, Tender Curry Cut, Boneless | Highest local rating, daily fresh morning supply, tender meat. |
+| 🥈 **2** | **Bangalore Mutton Stall & Country Cuts** | Avalahalli Lake Road / Virgo Nagar | Tender Bone-in Cuts, Marrow Bones (*Nalli*) | Ideal for authentic Bangalore-style Donne Biryani and spicy Natti Saaru. |
+| 🥉 **3** | **New Al-Madeena Halal Mutton Center** | Avalahalli Signal / Bhattarahalli | 100% Halal Tender Goat, Paya (Trotters), Boti | Clean cuts, freshly dressed goat, customized piece sizes. |
+
+---
+
+### 💡 Pro Tips for Buying the Best Mutton in Avalahalli
+1. **Best Buying Hours**: Visit early morning (**07:00 AM – 09:30 AM**) on **Wednesdays, Fridays, and Sundays** to get the freshest choice cuts.
+2. **Cut Recommendations**:
+   - 🍲 **For Rich Mutton Curry / Saaru**: Ask for *Shoulder (Dast)* or *Hind Leg (Raan)* with a mix of bone-in pieces.
+   - 🍚 **For Dum Biryani**: Request medium-sized tender bone-in pieces with marrow bones (*Nalli*).
+   - 🥣 **For Paya Soup**: Buy freshly cleaned, flame-singed trotters (*Paya*) for authentic gelatinous broth.
+3. **Tenderness Check**: Look for light pink to vibrant red meat with firm, clean white fat marbling.
+
+---
+**Are you cooking a specific dish (e.g. Biryani, Natti Saaru, or Dry Pepper Fry) so I can suggest the exact cuts and cooking times?**"""
+
         # 1. Colleges in Bangalore / Engineering / Institutional Reviews
         if any(w in q for w in ['college', 'colleges', 'cllge', 'cllges', 'university', 'universities', 'engineering college', 'engineering colleges', 'iisc', 'rvce', 'bmsce', 'pes university', 'msrit', 'cit bangalore', 'cambridge institute', 'cit ']) or (('cit' in q or 'bangalore' in q) and any(w in q for w in ['good', 'review', 'rating', 'placement', 'cutoff', 'admission'])):
             if 'cit' in q or 'cambridge' in q:
