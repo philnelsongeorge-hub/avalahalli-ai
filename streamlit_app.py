@@ -11,6 +11,7 @@ import json
 import os
 import sys
 import re
+import base64
 
 # Add engine path
 ENGINE_DIR = os.path.join(os.path.dirname(__file__), 'server', 'src', 'engine')
@@ -31,33 +32,83 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# --- LOAD MUTTON BACKGROUND IMAGE (BASE64) ---
+def get_base64_image(image_path):
+    if os.path.exists(image_path):
+        with open(image_path, "rb") as img_file:
+            return base64.b64encode(img_file.read()).decode()
+    return ""
+
+img_path = os.path.join(os.path.dirname(__file__), "assets", "shalimar_mutton.jpg")
+img_b64 = get_base64_image(img_path)
+bg_css_url = f"data:image/jpeg;base64,{img_b64}" if img_b64 else "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=1920&q=80"
+
 # --- CUSTOM CSS STYLING ---
-st.markdown("""
+st.markdown(f"""
 <style>
     /* Dark Theme Adjustments */
-    .stApp {
+    .stApp {{
         background: linear-gradient(135deg, #0b0f19 0%, #111827 50%, #0b0f19 100%);
         color: #f8fafc;
-    }
+    }}
+
+    /* Real Shalimar Mutton Stall Background with Super Fast Fade Animation */
+    .stApp::before {{
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: url('{bg_css_url}') no-repeat center center fixed;
+        background-size: cover;
+        z-index: 0;
+        pointer-events: none;
+        animation: muttonBgFadeFast 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }}
+
+    @keyframes muttonBgFadeFast {{
+        0% {{
+            opacity: 0.85;
+            filter: blur(0px) brightness(1.05);
+        }}
+        30% {{
+            opacity: 0.40;
+            filter: blur(1px) brightness(0.9);
+        }}
+        70% {{
+            opacity: 0.10;
+            filter: blur(3px) brightness(0.7);
+        }}
+        100% {{
+            opacity: 0.02;
+            filter: blur(6px) brightness(0.5);
+        }}
+    }}
+
+    .main .block-container {{
+        position: relative;
+        z-index: 1;
+    }}
     
     /* Header Styling */
-    .avalahalli-header {
+    .avalahalli-header {{
         background: linear-gradient(90deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         font-weight: 800;
         font-size: 2.2rem;
         margin-bottom: 0.1rem;
-    }
+    }}
     
-    .avalahalli-sub {
+    .avalahalli-sub {{
         color: #94a3b8;
         font-size: 0.95rem;
         margin-bottom: 1.2rem;
-    }
+    }}
     
     /* Badge styling */
-    .persona-badge {
+    .persona-badge {{
         display: inline-block;
         padding: 2px 8px;
         border-radius: 6px;
@@ -65,14 +116,14 @@ st.markdown("""
         font-weight: 600;
         text-transform: uppercase;
         margin-bottom: 6px;
-    }
+    }}
     
-    .badge-general { background: #3b82f6; color: white; }
-    .badge-coder { background: #10b981; color: white; }
-    .badge-research { background: #8b5cf6; color: white; }
-    .badge-travel { background: #f59e0b; color: white; }
-    .badge-creative { background: #ec4899; color: white; }
-    .badge-academic { background: #06b6d4; color: white; }
+    .badge-general {{ background: #3b82f6; color: white; }}
+    .badge-coder {{ background: #10b981; color: white; }}
+    .badge-research {{ background: #8b5cf6; color: white; }}
+    .badge-travel {{ background: #f59e0b; color: white; }}
+    .badge-creative {{ background: #ec4899; color: white; }}
+    .badge-academic {{ background: #06b6d4; color: white; }}
 </style>
 """, unsafe_allow_html=True)
 
