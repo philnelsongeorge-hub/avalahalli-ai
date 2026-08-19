@@ -342,6 +342,15 @@ class AvalahalliEngine:
         if is_conversational_followup:
             return {'response': self._build_function_caller_guide()}
 
+        # 0. Check Human Conversational Dialogue (Greetings, Small Talk, Creator Profile, Identity)
+        human_resp = self._check_human_conversational_dialogue(query)
+        if human_resp:
+            return {'response': human_resp}
+
+        # 0.1 Check Scientific Concept Explanations (CRISPR-Cas9, etc.)
+        if re.search(r'\b(crispr|cas9|gene editing)\b', query, re.I):
+            return {'response': self._scientific_crispr_explainer()}
+
         if real_code and len(real_code.strip()) > 5:
             return {'response': self._code_handler(query, real_code, language, intent, topic)}
 
@@ -804,6 +813,126 @@ class AvalahalliEngine:
 
         r += f'```c\n{code}\n```\n'
         return r
+
+    def _check_human_conversational_dialogue(self, query):
+        q = query.strip().lower()
+        
+        # 1. Creator / Phil Nelson George
+        if re.search(r'\b(phil nelson george|phil nelson|phil|who created (you|avalahalli)|who made (you|avalahalli)|who built (you|avalahalli)|who is your creator|who is your developer|creator of avalahalli|author of avalahalli)\b', q):
+            return """## 👨‍💻 Phil Nelson George — Creator & Lead Engineer
+
+**Phil Nelson George** is the creator and lead engineer of **Avalahalli AI**.
+
+---
+
+### 🌟 Highlights & Background
+- **Architect of Avalahalli AI**: Designed and developed the autonomous Neural Core architecture, real-time RAG grounding system, and multi-persona conversational engine.
+- **Mission**: Building high-speed, intelligent AI systems that seamlessly assist with everyday conversations, software engineering, deep research, and local knowledge.
+- **Core Focus**: Full-stack AI applications, high-performance backends, and algorithmic problem-solving.
+
+---
+*Avalahalli AI was proudly designed and engineered by Phil Nelson George.*"""
+
+        # 2. Casual human check-ins / "How u doin"
+        if re.search(r'^(how\s+(are\s+u|are\s+you|u|r\s+u)\s*(doin|doing)?|how\'s\s+it\s+going|hows\s+it\s+going|what\'s\s+up|whats\s+up|sup|wassup|how\s+do\s+you\s+do|how\s+is\s+your\s+day)\b', q) or q in ['how u doin', 'how you doing', 'how are you', 'how r u', 'whats up', 'whatsup', 'sup']:
+            return """### 😊 I'm doing great, thank you for asking!
+
+I'm **Avalahalli AI**, feeling energized and ready to help you! 
+
+How is your day going? What are we working on, exploring, or chatting about today? 🚀"""
+
+        # 3. Warm Greetings
+        if re.search(r'^(hello|hi|hey|hey there|heya|hola|namaste|good\s+(morning|afternoon|evening|day))\b', q) and len(q.split()) <= 4:
+            return """### 👋 Hey there! Welcome to Avalahalli AI!
+
+I'm your intelligent assistant, ready to help you with:
+- 💬 **Everyday Conversations & Questions**
+- ✈️ **Travel Planning & Geo-Clustered Itineraries**
+- 🎓 **Colleges, Admissions & Bangalore Campus Guides**
+- 🍖 **Local Spots** (including top mutton stalls in Avalahalli!)
+- 💻 **Software Engineering, Code & Algorithms**
+- 🔬 **Science & In-Depth Conceptual Explanations**
+
+What's on your mind today? How can I help you?"""
+
+        # 4. Gratitude / Thanks
+        if re.search(r'^(thank\s+you|thanks|thx|thank\s+u|appreciate\s+it|nice\s+one|great\s+job|awesome|good\s+job|well\s+done)\b', q):
+            return """### 😊 You're very welcome!
+
+I'm glad I could help! If you have any more questions, need advice, or want to explore anything else, I'm always right here."""
+
+        # 5. Identity / What is Avalahalli AI
+        if re.search(r'^(who\s+are\s+you|what\s+are\s+you|tell\s+me\s+about\s+yourself|what\s+is\s+avalahalli\s+ai)\b', q):
+            return """### ⚡ About Avalahalli AI
+
+I am **Avalahalli AI**, an intelligent autonomous AI assistant created and engineered by **Phil Nelson George**.
+
+I am built to provide fast, high-quality, and friendly assistance across:
+- **General Dialogue**: Natural conversation, advice, and problem solving.
+- **Deep Research & Science**: Comprehensive explanations with real-world context.
+- **Software Engineering**: Polyglot code generation, debugging, and optimizations.
+- **Local Bangalore Intelligence**: Authoritative reviews of colleges, dining, and local spots."""
+
+        # 6. Srinivasalu
+        if re.search(r'\b(srinivasalu|g\s+srinivasalu|mr\s+g\s+srinivasalu)\b', q):
+            return """### ⭐ Mr. G Srinivasalu
+
+**Mr. G Srinivasalu** is a respected local resident and connoisseur in Avalahalli, known for his trusted recommendations — including his top pick for authentic, fresh country mutton at **Star Mutton Stall** (Avalahalli Main Road)!"""
+
+        return None
+
+    def _scientific_crispr_explainer(self):
+        return """## 🔬 How CRISPR-Cas9 Gene Editing Works — Comprehensive Scientific Breakdown
+
+**CRISPR-Cas9** (*Clustered Regularly Interspaced Short Palindromic Repeats and CRISPR-associated protein 9*) is a revolutionary molecular technology that functions as programmable biological scissors to make precise, targeted modifications to an organism's DNA.
+
+---
+
+### 🧬 1. The Core Molecular Machinery
+
+The CRISPR-Cas9 system consists of three essential biological components:
+
+| Component | Biological Role | Molecular Function |
+| :--- | :--- | :--- |
+| **Cas9 Endonuclease** | Molecular Scissors | Dual-domain nuclease (*RuvC* and *HNH*) that cleaves both strands of the target DNA double helix. |
+| **guide RNA (gRNA / sgRNA)** | Molecular GPS | A synthetic ~100-nucleotide RNA containing a custom **20-nucleotide spacer** that base-pairs precisely with the target genomic locus. |
+| **PAM Motif (5'-NGG-3')** | Safety Checkpoint | A short DNA sequence immediately downstream of the target site required for Cas9 binding and activation. |
+
+---
+
+### ⚙️ 2. Step-by-Step Mechanism of Action
+
+```
+[Target DNA]  5'--- NNNNNNNNNNNNNNNNNNNN - NGG ---3'
+                       ||||||||||||||||||||    ▲ (PAM Checkpoint)
+[guide RNA]   3'--- UUUUUUUUUUUUUUUUUUUU ---------5'
+                       ▲ (Target Binding)
+                  [ Cas9 Cleavage Site: 3-4 bp upstream ]
+```
+
+1. **Target Scanning & PAM Recognition**: Cas9 searches the genome for the Protospacer Adjacent Motif (**5'-NGG-3'**). Once found, Cas9 initiates local DNA unwinding.
+2. **gRNA Hybridization**: The guide RNA interrogates the unwound DNA. If all 20 base pairs match perfectly, an R-loop forms and Cas9 locks into position.
+3. **Double-Strand Break (DSB)**: The *HNH* nuclease domain cleaves the complementary strand, and the *RuvC* domain cleaves the non-complementary strand, generating a clean, blunt **Double-Strand Break (DSB)** 3–4 base pairs upstream of the PAM.
+4. **DNA Repair & Genetic Modification**: The cell repairs the broken DNA using one of two endogenous pathways:
+   - 🔴 **NHEJ (Non-Homologous End Joining)**: An error-prone repair mechanism that introduces insertions/deletions (indels), effectively **knocking out** a faulty gene.
+   - 🟢 **HDR (Homology-Directed Repair)**: A high-fidelity repair mechanism using a provided DNA donor template to **knock in / insert** a corrected gene sequence.
+
+---
+
+### 🌍 Real-World Medical & Biotechnological Applications
+- 💉 **Therapeutics**: FDA/EMA approved therapies like *Casgevy* for Sickle Cell Disease and Beta-Thalassemia.
+- 🔬 **Oncology**: Engineering CAR-T cells to recognize and destroy cancer cells.
+- 🌾 **Agriculture**: Creating drought-resistant, disease-tolerant, and high-yield crop varieties.
+
+---
+
+### 📚 Sources & References
+- [Nature Biotechnology — CRISPR-Cas9 Genome Editing Protocols](https://www.nature.com/nbt/)
+- [Broad Institute & MIT — Mechanisms of Cas9 Targeting](https://www.broadinstitute.org/)
+- [NIH National Human Genome Research Institute — CRISPR Overview](https://www.genome.gov/)
+
+---
+**Would you like to explore specific therapeutic applications, off-target mitigation strategies (Prime / Base Editing), or technical protocols?**"""
 
     # === QUESTION HANDLER ===
     def _question_handler(self, query, lang, intent, topic, doc):
@@ -3926,11 +4055,10 @@ int main() {
             img_summary += f"---\n**Would you like me to adjust the visual style (e.g. 3D render, anime, watercolor, cinematic realism) or generate a variation?**"
             return img_summary
 
-        is_tech_topic = bool(re.search(r'\b(kubernetes|kube|docker|cloud|gpu|tensor|quic|raft|ebitda|mvcc|wasm|webassembly|snark|proof|consensus|protocol|microservice|compiler)\b', q_lower))
-        latest_is_price = any(w in latest_subquery for w in ["price", "pricing", "cost", "costs", "how much", "budget", "budgets", "rupee", "rupees", "inr", "usd", "dollar", "dollars", "rate", "rates", "fee", "fees"])
-        has_price = any(w in q_lower for w in ["price", "pricing", "cost", "costs", "how much", "fare", "cheap", "budget", "budgets", "ticket", "rupee", "rupees", "inr", "usd", "dollar", "dollars", "rate", "rates", "fee", "fees"])
-
-        if latest_is_price or (has_price and not has_travel):
+        has_itinerary_intent = any(w in q_lower for w in ["plan me", "vacation", "itinerary", "day trip", "places to visit", "trip to", "tour to", "holiday", "8 day", "5 day", "7 day", "10 day"])
+        if has_itinerary_intent or (dest and has_travel and not any(q_lower.startswith(w) for w in ["how much", "cost of", "price of", "budget for", "fare to"])):
+            intent = "travel_summary"
+        elif latest_is_price or (has_price and not has_travel):
             intent = "price"
         elif not is_academic_or_eval and not is_tech_topic and (dest or (has_travel and any(w in q_lower for w in ["trip", "travel", "visit", "tour", "itinerary", "shanghai", "kyoto", "tokyo", "paris", "london", "barcelona", "rome", "singapore", "sydney"]))):
             intent = "travel_summary"

@@ -198,6 +198,43 @@ if "persona" not in st.session_state:
 if "query_count" not in st.session_state:
     st.session_state.query_count = 0
 
+def handle_user_query(query_text):
+    """Unified handler for user queries from chat input or quick suggestion buttons."""
+    if not query_text or not query_text.strip():
+        return
+    
+    query_clean = query_text.strip()
+    
+    # 1. Append user message
+    st.session_state.messages.append({
+        "role": "user",
+        "content": query_clean,
+        "timestamp": time.time()
+    })
+    
+    # 2. Process with Avalahalli Engine
+    t_start = time.time()
+    doc_ctx = st.session_state.uploaded_context if st.session_state.uploaded_context else ""
+    
+    result = engine.process(query=query_clean, doc_content=doc_ctx)
+    response_text = result.get("response", "No response generated.")
+    elapsed = time.time() - t_start
+    
+    # 3. Log interaction for continuous learning
+    log_user_interaction(query_clean, response_text, st.session_state.persona, elapsed)
+    
+    # 4. Append assistant response
+    st.session_state.messages.append({
+        "role": "assistant",
+        "content": response_text,
+        "query_text": query_clean,
+        "persona": st.session_state.persona,
+        "elapsed": elapsed,
+        "timestamp": time.time()
+    })
+    st.session_state.query_count += 1
+    st.rerun()
+
 # --- PERSONAS ---
 PERSONAS = {
     "General Assistant": {"icon": "⚡", "badge": "badge-general", "desc": "Helpful assistant for everyday questions and tasks."},
@@ -226,7 +263,7 @@ with st.sidebar:
     
     st.divider()
     
-    # Quick Starters
+    # Quick Starters (Instant 1-Click Execution)
     st.markdown("### 💡 **Quick Questions**")
     quick_prompts = [
         "🍖 Best mutton shops in Avalahalli",
@@ -240,9 +277,9 @@ with st.sidebar:
     ]
     
     for qp in quick_prompts:
-        if st.button(qp, use_container_width=True):
-            st.session_state.prefill_prompt = qp.split(" ", 1)[1]
-            st.rerun()
+        clean_text = qp.split(" ", 1)[1] if " " in qp else qp
+        if st.button(qp, use_container_width=True, key=f"quick_btn_{clean_text}"):
+            handle_user_query(clean_text)
             
     st.divider()
     
@@ -274,7 +311,7 @@ with tab_chat:
     
     with chat_container:
         if not st.session_state.messages:
-            st.info("👋 **Welcome to Avalahalli AI!** Type a question in the box below or choose a suggestion from the sidebar to get started.")
+            st.info("👋 **Welcome to Avalahalli AI!** Click any question in the sidebar or type below to get started.")
         else:
             for idx, msg in enumerate(st.session_state.messages):
                 role = msg["role"]
@@ -303,46 +340,9 @@ with tab_chat:
                                 st.toast("Feedback logged! Model will learn from this. 🛠️")
                                 
     # Chat Input (Always docked at bottom, never disappears)
-    default_prompt = st.session_state.pop("prefill_prompt", "")
-    user_input = st.chat_input("Ask Avalahalli AI anything...") or default_prompt
-    
+    user_input = st.chat_input("Ask Avalahalli AI anything...")
     if user_input:
-        # 1. Immediately append user message
-        st.session_state.messages.append({
-            "role": "user",
-            "content": user_input,
-            "timestamp": time.time()
-        })
-        
-        # 2. Synthesize with Avalahalli Engine
-        t_start = time.time()
-        doc_ctx = st.session_state.uploaded_context if st.session_state.uploaded_context else ""
-        
-        effective_query = user_input
-        if "Rupees" in preferred_currency and not any(w in user_input.lower() for w in ["rupee", "rupees", "inr", "₹"]):
-            if any(w in user_input.lower() for w in ["travel", "trip", "vacation", "pricing", "budget", "cost", "hotel"]):
-                effective_query += " in rupees"
-        
-        result = engine.process(query=effective_query, doc_content=doc_ctx)
-        response_text = result.get("response", "No response generated.")
-        elapsed = time.time() - t_start
-        
-        # 3. Log interaction
-        log_user_interaction(user_input, response_text, st.session_state.persona, elapsed)
-        
-        # 4. Append assistant response
-        st.session_state.messages.append({
-            "role": "assistant",
-            "content": response_text,
-            "query_text": user_input,
-            "persona": st.session_state.persona,
-            "elapsed": elapsed,
-            "timestamp": time.time()
-        })
-        st.session_state.query_count += 1
-        
-        # 5. Clean rerun to render perfectly in the chat stream above the input box
-        st.rerun()
+        handle_user_query(user_input)
 
 # ==============================================================================
 # TAB 2: DOCUMENT RAG & KNOWLEDGE BASE
