@@ -32,16 +32,19 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# --- LOAD MUTTON BACKGROUND IMAGE (BASE64) ---
-def get_base64_image(image_path):
-    if os.path.exists(image_path):
-        with open(image_path, "rb") as img_file:
-            return base64.b64encode(img_file.read()).decode()
-    return ""
-
-img_path = os.path.join(os.path.dirname(__file__), "assets", "shalimar_mutton.jpg")
-img_b64 = get_base64_image(img_path)
-bg_css_url = f"data:image/jpeg;base64,{img_b64}" if img_b64 else "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=1920&q=80"
+# --- LOAD SHALIMAR MUTTON BACKGROUND IMAGE (SELF-CONTAINED BASE64) ---
+try:
+    from shalimar_b64 import SHALIMAR_IMAGE_B64
+    bg_css_url = f"data:image/jpeg;base64,{SHALIMAR_IMAGE_B64}"
+except ImportError:
+    def get_base64_image(image_path):
+        if os.path.exists(image_path):
+            with open(image_path, "rb") as img_file:
+                return base64.b64encode(img_file.read()).decode()
+        return ""
+    img_path = os.path.join(os.path.dirname(__file__), "assets", "shalimar_mutton.jpg")
+    img_b64 = get_base64_image(img_path)
+    bg_css_url = f"data:image/jpeg;base64,{img_b64}" if img_b64 else ""
 
 # --- CUSTOM CSS STYLING ---
 st.markdown(f"""
