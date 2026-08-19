@@ -4247,13 +4247,14 @@ Here is the definitive local guide to the best mutton shops in Avalahalli, featu
 
 ---
 
-### 🏆 **Top 3 Recommended Mutton Shops in Avalahalli**
+### 🏆 **Top Recommended Mutton Shops in Avalahalli**
 
 | Rank | Mutton Stall / Meat Center | Location / Landmark | Prime Specialty | Key Highlights |
 | :-: | :--- | :--- | :--- | :--- |
 | 🥇 **1** | **Star Mutton Stall & Fresh Cuts** *(Mr. G Srinivasalu's Pick)* | Avalahalli Main Road | Fresh Natti Potla Mutton, Tender Curry Cut, Boneless | Highest local rating, daily fresh morning supply, tender meat. |
-| 🥈 **2** | **Bangalore Mutton Stall & Country Cuts** | Avalahalli Lake Road / Virgo Nagar | Tender Bone-in Cuts, Marrow Bones (*Nalli*) | Ideal for authentic Bangalore-style Donne Biryani and spicy Natti Saaru. |
-| 🥉 **3** | **New Al-Madeena Halal Mutton Center** | Avalahalli Signal / Bhattarahalli | 100% Halal Tender Goat, Paya (Trotters), Boti | Clean cuts, freshly dressed goat, customized piece sizes. |
+| 🥈 **2** | **Shalimar Mutton Stall** *(A. Bakhesh)* | Avalahalli Main Market | Fresh Whole Dressed Goat, Tender Chops, Paya & Marrow | Classic local butcher stall with daily fresh hanging cuts & custom butchering. |
+| 🥉 **3** | **Bangalore Mutton Stall & Country Cuts** | Avalahalli Lake Road / Virgo Nagar | Tender Bone-in Cuts, Marrow Bones (*Nalli*) | Ideal for authentic Bangalore-style Donne Biryani and spicy Natti Saaru. |
+| 4 | **New Al-Madeena Halal Mutton Center** | Avalahalli Signal / Bhattarahalli | 100% Halal Tender Goat, Paya (Trotters), Boti | Clean cuts, freshly dressed goat, customized piece sizes. |
 
 ---
 

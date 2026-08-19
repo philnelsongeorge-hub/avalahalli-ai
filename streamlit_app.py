@@ -368,66 +368,95 @@ with tab_rag:
         st.info("Upload any document above to chat with its contents.")
 
 # ==============================================================================
-# TAB 3: USER LOGS & CONTINUOUS LEARNING
+# TAB 3: USER LOGS & CONTINUOUS LEARNING (PASSWORD PROTECTED)
 # ==============================================================================
 with tab_logs:
-    st.markdown("### 📊 Interaction Logs & Continuous Learning Dashboard")
-    st.markdown("Avalahalli AI automatically records queries, latency, and user feedback (👍 / 👎) to identify mistakes and train continuously.")
-    
-    all_logs = get_all_logged_interactions()
-    
-    c1, c2, c3 = st.columns(3)
-    with c1:
-        st.metric("Total User Interactions Logged", len(all_logs))
-    with c2:
-        positive_fb = sum(1 for l in all_logs if l.get("feedback") == "positive")
-        total_fb = sum(1 for l in all_logs if l.get("feedback") in ["positive", "negative"])
-        fb_rate = f"{(positive_fb / total_fb * 100):.1f}%" if total_fb > 0 else "100.0%"
-        st.metric("Positive Feedback Rate (👍)", fb_rate)
-    with c3:
-        st.metric("Engine Health", "Online & Logging 🟢")
+    if "admin_logged_in" not in st.session_state:
+        st.session_state.admin_logged_in = False
         
-    st.divider()
+    CORRECT_ADMIN_PASS = os.environ.get("ADMIN_PASSWORD", "avalahalli2026")
     
-    col_btn1, col_btn2 = st.columns(2)
-    with col_btn1:
-        # Download Logs Button
-        log_json_data = json.dumps(all_logs, indent=2, ensure_ascii=False)
-        st.download_button(
-            label="📥 Download All Logs (JSON)",
-            data=log_json_data,
-            file_name=f"avalahalli_ai_logs_{datetime.now().strftime('%Y%m%d')}.json",
-            mime="application/json",
-            use_container_width=True
-        )
-    with col_btn2:
-        if st.button("🧠 Run Automated Log Audit & Mistake Training", use_container_width=True):
-            with st.spinner("Analyzing all interaction logs for edge cases and errors..."):
-                try:
-                    from auto_train_from_logs import analyze_and_train_from_logs
-                    res = analyze_and_train_from_logs()
-                    st.success(f"🎉 Audited {res.get('total', 0)} queries! Perfect Synthesis Rate: {res.get('accuracy', 100):.2f}% with {res.get('mistakes_count', 0)} mistakes.")
-                except Exception as e:
-                    st.error(f"Error running training script: {e}")
-                    
-    st.divider()
-    
-    st.markdown("#### 📋 Latest 20 User Inquiries & Responses")
-    if all_logs:
-        import pandas as pd
-        table_rows = []
-        for l in reversed(all_logs[-20:]):
-            table_rows.append({
-                "Timestamp": l.get("timestamp", "")[:19].replace("T", " "),
-                "User Query": l.get("query", ""),
-                "Persona": l.get("persona", "General"),
-                "Feedback": "👍" if l.get("feedback") == "positive" else ("👎" if l.get("feedback") == "negative" else "—"),
-                "Speed": f"{l.get('elapsed_s', l.get('executionTimeMs', 0) / 1000):.2f}s"
-            })
-        df_logs = pd.DataFrame(table_rows)
-        st.dataframe(df_logs, use_container_width=True)
+    if not st.session_state.admin_logged_in:
+        st.markdown("### 🔒 Protected Admin Portal")
+        st.info("User interaction logs, feedback history, and learning controls are private and restricted to the admin.")
+        
+        c_in, c_btn = st.columns([0.7, 0.3])
+        with c_in:
+            entered_pass = st.text_input("🔑 Enter Admin Password", type="password", placeholder="Enter admin password to unlock...", key="admin_pwd_field")
+        with c_btn:
+            st.markdown("<div style='height: 28px;'></div>", unsafe_allow_html=True)
+            if st.button("🔓 Unlock Logs Dashboard", use_container_width=True):
+                if entered_pass == CORRECT_ADMIN_PASS:
+                    st.session_state.admin_logged_in = True
+                    st.success("✅ Access Granted!")
+                    st.rerun()
+                else:
+                    st.error("❌ Incorrect password. Access denied.")
     else:
-        st.info("No queries logged yet. Start chatting in Tab 1 to generate live logs!")
+        c_head, c_lock = st.columns([0.8, 0.2])
+        with c_head:
+            st.markdown("### 📊 Admin Logs & Continuous Learning Dashboard")
+        with c_lock:
+            if st.button("🔒 Lock Dashboard", use_container_width=True):
+                st.session_state.admin_logged_in = False
+                st.rerun()
+                
+        st.markdown("Avalahalli AI records user queries, latency, and user feedback (👍 / 👎) to identify mistakes and train continuously.")
+        
+        all_logs = get_all_logged_interactions()
+        
+        c1, c2, c3 = st.columns(3)
+        with c1:
+            st.metric("Total User Interactions Logged", len(all_logs))
+        with c2:
+            positive_fb = sum(1 for l in all_logs if l.get("feedback") == "positive")
+            total_fb = sum(1 for l in all_logs if l.get("feedback") in ["positive", "negative"])
+            fb_rate = f"{(positive_fb / total_fb * 100):.1f}%" if total_fb > 0 else "100.0%"
+            st.metric("Positive Feedback Rate (👍)", fb_rate)
+        with c3:
+            st.metric("Engine Health", "Online & Logging 🟢")
+            
+        st.divider()
+        
+        col_btn1, col_btn2 = st.columns(2)
+        with col_btn1:
+            # Download Logs Button
+            log_json_data = json.dumps(all_logs, indent=2, ensure_ascii=False)
+            st.download_button(
+                label="📥 Download All Logs (JSON)",
+                data=log_json_data,
+                file_name=f"avalahalli_ai_logs_{datetime.now().strftime('%Y%m%d')}.json",
+                mime="application/json",
+                use_container_width=True
+            )
+        with col_btn2:
+            if st.button("🧠 Run Automated Log Audit & Mistake Training", use_container_width=True):
+                with st.spinner("Analyzing all interaction logs for edge cases and errors..."):
+                    try:
+                        from auto_train_from_logs import analyze_and_train_from_logs
+                        res = analyze_and_train_from_logs()
+                        st.success(f"🎉 Audited {res.get('total', 0)} queries! Perfect Synthesis Rate: {res.get('accuracy', 100):.2f}% with {res.get('mistakes_count', 0)} mistakes.")
+                    except Exception as e:
+                        st.error(f"Error running training script: {e}")
+                        
+        st.divider()
+        
+        st.markdown("#### 📋 Latest 20 User Inquiries & Responses")
+        if all_logs:
+            import pandas as pd
+            table_rows = []
+            for l in reversed(all_logs[-20:]):
+                table_rows.append({
+                    "Timestamp": l.get("timestamp", "")[:19].replace("T", " "),
+                    "User Query": l.get("query", ""),
+                    "Persona": l.get("persona", "General"),
+                    "Feedback": "👍" if l.get("feedback") == "positive" else ("👎" if l.get("feedback") == "negative" else "—"),
+                    "Speed": f"{l.get('elapsed_s', l.get('executionTimeMs', 0) / 1000):.2f}s"
+                })
+            df_logs = pd.DataFrame(table_rows)
+            st.dataframe(df_logs, use_container_width=True)
+        else:
+            st.info("No queries logged yet. Start chatting in Tab 1 to generate live logs!")
 
 # ==============================================================================
 # TAB 4: HOSTING & DEPLOYMENT GUIDE
